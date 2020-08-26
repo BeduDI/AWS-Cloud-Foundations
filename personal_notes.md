@@ -20,3 +20,7 @@ Shared responsibility model
 
 
 cloud economics, why would customer want to move to aws 
+
+
+
+https://twitter.com/borillo/status/1290988147606794240
