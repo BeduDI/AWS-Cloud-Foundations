@@ -37,3 +37,7 @@ https://19x50e48lpyz2s9tzz3qjjsn-wpengine.netdna-ssl.com/wp-content/uploads/2019
 
 COmo aws mide los costos de transferencia inter region:
 https://www.lastweekinaws.com/blog/aws-cross-az-data-transfer-costs-more-than-aws-says/
+
+
+Tagging
+https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
