@@ -30,7 +30,7 @@ https://twitter.com/borillo/status/1290988147606794240
 # Modelo de responsabilidad compartido
 
 
-PRecios de trafico de aws
+Precios de tráfico de aws
 https://19x50e48lpyz2s9tzz3qjjsn-wpengine.netdna-ssl.com/wp-content/uploads/2019/12/dbg010-datatxfr-infographic-20191219.jpg
 
 
