@@ -44,36 +44,81 @@ Es compatible con snapshots para backups, cifrado con llaves KMS, es compatible 
 Aurora brinda un rendimiento aproximado 5X cuando hablamos de bases de datos MySQL tradicionales y 3X al hablar de Postgres, esto se logra con su motor propietario optimizado para ejecutarse sobre una configuración de hardware específica de SSD.
 Si es posible modificar el tamaño de la instancia, la memoria y el número de CPUs, sin embargo no es en `caliente`, se tiene que entrar en un periodo de mantenimiento (la instancia deja de estar disponible) hasta que los cambios se realicen, es el análogo a reiniciar la instancia para que se ajuste a los nuevos valores.
 
-- Amazon Relational Database Service (RDS)
+# Amazon Relational Database Service (RDS)
+
+Servicio PaaS de base de datos relacionales. Soporta motores MySQL, MariaDB, Oracle, SQL Server y Postgres.
+Al ser un PaaS no hay mucho que administrar, incluso si se desea replicación en múltiples zonas de disponibilidad el PaaS lo hace prácticamente transparente, incluso ante falla el cambio de base de datos a otra zona de disponibilidad es transparente a la aplicación. 
+Las copias de seguridad están cubiertas con la tecnología de snapshots, se puede establecer la frecuencia (RPO) en que se tomarán los snapshots al igual que el tiempo que mantendremos esas copias de seguridad disponibles para restaurar por que se debe tomar en cuenta que estas copias de seguridad ocupan espacio en disco duro y el espacio tiene un costo monetario.
+Un punto base de RDS es la configuración de VPC para tener una instancia funcionando. Al generar una nueva instancia será necesario generar un _grupo de subred_, no es mas que una figura que conjunta subredes de VPC de diferentes zonas de disponibilidad para conectar la instancia RDS a la red, dicho de otro modo, se requerirán subredes en mínimo dos zonas de disponibilidad distintas para provisionar una instancia RDS, es de especial importancia tomar esto en cuenta a la hora de diseñar la arquitectura de red VPC.
+La seguridad de datos en reposo cambien está garantizada al ser un servicio compatible con KMS. La seguridad de autorización y autenticación también garantizada, hay compatibilidad con IAM y CloudTrial.
+El servicio RDS da la flexibilidad para escalar la base de datos a una instancia con mayor memoria o CPU de manera flexible, solo hay que tomar en cuenta que para modificar el tamaño de la instancia se debe pasar por un periodo de reinicio de la instancia lo que dejará inaccesible la base de datos a las aplicaciones que se conectan a ella por unos 15 minutos.
+
 # Amazon DynamoDB
-DynamoDB es una base de datos NoSQL, 
-El esquema de precios de DynamoDB es difícil de calcular, en resumen el precio es calculado  por el almacenamiento de datos, escrituras y leecturas de información.
+DynamoDB es un tipo de base de datos NoSQL, en específico una base de datos  documental (soporta formato JSON).
+El esquema de precios de DynamoDB es difícil de calcular, en resumen el precio es calculado  por el almacenamiento de datos, escrituras y lecturas de información.
 
-Almacenamiento de datos
-DynamoDB cobra por GB de espacio en disco que consume una tabla. Los primeros 25 GB consumidos por mes son gratuitos y los precios comienzan en 0,25 dólares por GB al mes.
+Unidades de lectura: Una unidad de lectura o escritura (RCU y WCU) representan las lecturas y escrituras por segundo que una tabla de DynamoDB puede proveer.
 
-Escritura
-AWS calcula el costo de las escrituras utilizando "Unidades de capacidad de escritura". Cada WCU proporciona hasta una escritura por segundo, suficiente para 2.6 millones de escrituras por mes. DynamoDB cobra una unidad de solicitud de escritura por cada escritura (hasta 1 KB) y dos unidades de solicitud de escritura por escrituras transaccionales.
+Lectura consistencia final: Es posible que la respuesta no refleje los resultados de una operación de escritura completada recientemente. La respuesta puede incluir algunos datos obsoletos. Si repite la solicitud de lectura después de un corto período de tiempo, la respuesta debe devolver los datos más recientes.
+Requiere 1 RCU para datos de hasta 4KB
 
-Lectura
-AWS calcula el costo de las lecturas mediante "Unidades de capacidad de lectura". Cada RCU proporciona hasta dos lecturas por segundo, suficiente para 5.2 millones de lecturas por mes. DynamoDB cobra una unidad de solicitud de lectura por cada lectura de gran coherencia (hasta 4 KB), dos unidades de solicitud de lectura por cada lectura transaccional y la mitad de la unidad de solicitud de lectura por cada lectura eventualmente coherente.
+Lectura alta mente coherente: Cuando solicita una lectura altamente  coherente, DynamoDB devuelve una respuesta con los datos más actualizados, reflejando las actualizaciones de todas las operaciones de escritura anteriores que se realizaron correctamente.
+Requiere 2 RCU para datos de hasta 4KB
 
-Cuando se solicita una lectura  consistente, DynamoDB devuelve una respuesta con los datos más actualizados, lo que refleja las actualizaciones de todas las operaciones de escritura anteriores que tuvieron éxito
+Lecturas transaccionales:
+Con ellas se garantizan los principios [ACID](https://www.essentialsql.com/sql-acid-database-properties-explained/), con es posible generar flujos complejos de que incluyan crear, actualizar o borrar elementos en una única operación llamada transacción. Estas lecturas consumen 2 RCU.
+
+Escritura:  Cuenta con escrituras estandar y consistencia final, las escrituras estandar requieren una WCU hasta elementos de 1KB mientras las transaccionales consumen 2  WCU por datos de hasta 1 KB. 
+Precios bajo demanda aplican bajo los conceptos WCU y RCU,  las solicitudes de lectura cuestan 1.25 USD por millón de solicitudes y 0.25 USD por millón de solicitudes de escritura.
+
+El almacenamiento o storage representan un costo de 0.25 USD por GB al mes. A los cargos anteriores debemos sumar costos de copias de seguridad, restablecimientos de los datos.
+En el caso de tablas globales (múltiples regiones) las solicitudes de escritura tienen costo así como la transferencia de datos por ser entre regiones.
+En caso de requerir aceleración por medio de cache (Dynamo DAX) dependiendo del tamaño de la instancia se aplican costos extra. 
+Si se requieren generar acciones ante eventos en tablas específicas habrá de habilitarse DynamoDB Streams para poder conectar con AWS Lambda y ejecutar la tarea requerida, ambos servicios tienen costos adicionales.
+
+A continuación se muestra un registro u elemento en una tabla de Dynamo DB
+![registro.png](registro.png)
+
 
 # Amazon Elasticache 
+Dentro de la gran familia de las bases de datos NoSQL encontramos a Redis y Memcached.
+Redis es muy bueno para resolver cierto tipo de problemas que representan tradicionalmente un cuello de botella en bases de datos relacionales o sistemas de archivos.
+Por ejemplo, el carrito de compra de una web sin problema puede ser guardado ya sea en sesión o directamente en la base de datos, ambos enfoques se pueden mejorar bastante en rendimiento al usuario final si en lugar de guardar la información del carrito de compra en disco duro se guarda en memoria RAM por medio de Redis, al estar en memoria RAM la transacción de agregar o eliminar productos del carrito aumentará de manera notable. Lo mismo se puede hacer con Memcached, pero si es requerimiento mantener los carritos de compra en disco persistente (se desea tener esta información en el data lake para luego llevarla a un data warehouse) Redis es la opción, tiene la opción de persistir los datos que maneja en RAM en un periodo configurable, Memcached no cuenta con esto.  
+Las principales diferencias son:
+Memcached| Característica    | Redis                                                | Memcache                                              |
+|-------------------|------------------------------------------------------|-------------------------------------------------------|
+| Tipos de datos    | string,list,set,hash,bit,geo espacial principalmente | string                                                |
+| Manejo de memoria | Puede guardar datos en disco si la RAM se ha agotado | Soporta guardado en memoria con la extensión extstore |
+| Límite de datos   | Puede manejar strings de hasta 512 MB                | solo 1MB                                              |
+| Replicación       | Soportada con herramientas eternas                   | No sportada                                           |
+| Esquema pub/sub   | Soportado                                            | No soportado                                          |
+| Modo cluster      | Soporte nativo                                       | Soporte parcial                                       |Memcached
+
+AWS Elasctic es el servicio para implementar nodos Redis o Memcached completamente administrado con capacidad de escalado de 256 nodos y hasta 170 TB de capacidad para almacenamiento de RAM. Es posible implementarlo dentro de una VPC o fuera de ella, en ambos casos se tienen que configurar grupos de seguridad para especificar quien si puede acceder al cluster de nodos y quien no. En el caso de seleccionar Redis como motor se puede optar por un soporte de para múltiples zonas de disponibilidad ofreciendo conmutación por error de nodos automática. 
+Importante a tomar en cuenta en Elasticache, Memcached no es apto para manejar datos de tarjetas de crédito al no cumplir con la certificación PCI DSS, Redis si la cumple. Memcached no tiene la capacidad para realizar un backup y restauración de datos, Redis si tiene esa capacidad.
+
 # Amazon Redshift
+BIG data. datalake? dataware house?
+Múltiples aplicaciones generando datos, sistemas ERP, puntos de venta, chats de atención al cliente, grabaciones de audio y vídeo, emails, son muchos los datos y la diversidad de datos generados por una organización. Los datos desde cada generador tienen formatos distintos, binarios, json, txt, pst en email, reportes de Excel, etc, sin problema pueden ser guardados en un bucket S3 a modo de `Datalake`, un lugar donde es viable guardar tanto datos estructurados como no estructurados. 
+Pero la información así no sirve de mucho, para transformar esos datos en información es necesario darles una estructura, la información debe responder a las preguntas ¿donde?, ¿que?, ¿quien?, ¿cuando?, en ventas importa por lo menos saber quien vendió que cosa en que fecha y la localización de la venta por ejemplo. Para estas tareas es especialmente valioso contar con un  Data Warehouse como respaldo a las tareas de Business Intelligence, analítica y reportes de la organización para tomar decisiones en la operación diaria y análisis de datos históricos.
+
+![datawarehouse.png](datawarehouse.png)
+Los Data Warehouse deben tener la capacidad de manejar grandes volúmenes de información a la hora de extraer datos hacia un reporte, no es atractivo tener reportes que tarden minutos o hasta horas en generarse, por lo cual se demandan recursos que puedan manejar la demanda.
+AWS Redshift es el Data Warehouse de Amazon, es un entorno PaaS con lo que en unos cuantos clicks se tendrá un cluster listo para ingestar datos y procesarlos siempre con la flexibilidad de escalamiento desde unos pocos GB hasta PB de datos, la arquitectura de Redshift permite extraer información de los datos en poco tiempo aún trabajando sobre GB de datos y miles de consultas simultáneas. Ofrece un esquema de precios flexible al escoger el tamaño de RAM y CPU del cluster, facilita las copias de seguridad, es altamente tolerante a errores, se integra bien con el lenguaje de consultas SQL, puede trabajar incluso con tipos de datos espaciales especialmente importante en aplicaciones de entrega de productos donde hacer cálculos con referencias geográficas es especialmente importante. 
+Se integra con otros servicios de AWS como DynamoDB o S3 para ingesta de datos, tiene capacidad para cifrar los datos en tránsito y reposo con SSL y AES-256, el monitoreo está cubierto con la integración a CloudTrail registrando las consultas hechas, quien las hizo, los cambios realizados y los intentos de conexión.
+
 
 
 # AWS Storage Gateway
 Es un servicio que nos permite conectar aplicaciones on premise con storage basado en la nube.
-Soporta conexión con tres tipos de storage, File gateway (almacén en S3) compatible con el protocolo NFS y SMB integrando con IAM, KSM para cifrado, CloudWatch para monitoreo , Volume gateway (almacén en EBS) y Tape gateway (Almacén en S3 Gacier).
-El servicio puede ser hosteado en una maquina virtual on premise en hypervisores ESX, HyperV o lanzar una instancia EC2.
+Soporta conexión con tres tipos de storage, File gateway (almacén en S3) compatible con el protocolo NFS y SMB integrando con IAM, KMS para cifrado, CloudWatch para monitoreo , Volume gateway (almacén en EBS) y Tape gateway (Almacén en S3 Glacier).
+El servicio puede ser hosteado en una maquina virtual on premise en hypervisores ESX VMWare, HyperV o lanzar una instancia EC2.
 
 Un ejemplo es el uso de la solución de respaldos Backup Exec de Symantec. Es posible provisionar un nodo de storage Gateway de tipo Tape y conectar Backup Exec para guardar los respaldos directamente en S3.
 ![backupexec.png](backupexec.png)
 
 Otro ejemplo:
-Tenemos dos oficinas cada una en diferentes ciudades, montando una instancia de AWS Sotrage Gateway de tipo File en cada oficina con acceso a un bucket específico de S3 ambas localizaciones tendrán acceso a los archivos del bucket de forma fácil en sus sitemas operativos, en el caso de Widows se refleja como una unidad de red montada.
+Tenemos dos oficinas cada una en diferentes ciudades, montando una instancia de AWS Sotrage Gateway de tipo File en cada oficina con acceso a un bucket específico de S3 ambas localizaciones tendrán acceso a los archivos del bucket de forma fácil en sus sistemas operativos, en el caso de Widows se refleja como una unidad de red montada.
 ![Montando-carpetas-compartidas.png](Montando-carpetas-compartidas.png)
 
 ![unidad virtual.png](unidad virtual.png)
@@ -85,23 +130,27 @@ Tenemos dos oficinas cada una en diferentes ciudades, montando una instancia de 
 Las bases de datos de documentos o documentales se centran en métodos de almacenamiento y acceso optimizados para documentos en lugar de filas o registros en una base de datos relacional. La forma de modelar   datos es un conjunto de colecciones de documentos que contienen colecciones de valores clave. En un almacén de documentos, los valores pueden ser otros documentos o listas anidadas y  valores escalares. Los nombres de los atributos no están predefinidos en un esquema global, sino que se definen dinámicamente para cada documento en tiempo de ejecución. A diferencia de las bases de datos relacionales, se autoriza una amplia gama de valores. 
 ![Document-db.png](Document-db.png)
 
-| RDBSM         | Mongo DB      |
-|---------------|---------------|
-| Base de datos | Base de datos |
-| Tabla         | Colección       |
-| Registro/Tupla| JSON            |
-| Columnas      | Campos del JSON |
+
+| RDBSM          | Mongo DB        |
+|----------------|-----------------|
+| Base de datos  | Base de datos   |
+| Tabla          | Colección       |
+| Registro/Tupla | JSON            |
+| Columnas       | Campos del JSON |
 
 
 AWS DocumentDB es una base de datos especializada en el guardado de información en formato JSON. Es compatible con la API MongoDB 3.6, en principio bastaría con modificar la cadena de conexión de la aplicación para migrar a AWS DocumenrDB.
-Es un servivio PaaS, no hay necesidad de preocuparse por administrar provisionamiento de hardware, red, parches de seguridad, configuración o instalación, incluso los respaldos están cubiertos con capacidad para respaldar directamente en S3.
+Es un servicio PaaS, no hay necesidad de preocuparse por administrar provisionamiento de hardware, red, parches de seguridad, configuración o instalación, incluso los respaldos están cubiertos con capacidad para respaldar directamente en S3.
 En cuanto a precio, DocumentDB se divide en cuatro dimensiones: costo por instancia, costo por E/S de datos, espacio de almacenamiento y respaldos. Un estimado en la AWS Pricing Calculator nos da el [siguiente resultado](https://calculator.aws/#/estimate?id=a8d70de522d91d5266c310c057038c7dcdde557c).
 
 
 
 
 # AWS Keyspaces
-https://www.youtube.com/watch?v=zehVQzlSuEU
+
+AWS  Keyspaces Amazon permite tener cargas de trabajo de base de datos Cassandra en la nube, no hay servidores para gestionar; no hay necesidad de provisión, configuración u operación por ser un servicio PaaS; no hay necesidad de añadir o eliminar manualmente  nodos ni necesidad de balancear carga entre nodos. Tradicionalmente los clusters Cassandra demandan alto grado de especialización, la configuración y mantenimiento son muy demandantes para los administradores.
+El servicio cobra por la cantidad de lecturas y escrituras hechas, por el almacenamiento en GB requerido por los datos y por la transferencia de datos en la red ya sea de entrada y salida desde y hacia otros servicios de AWS en diferentes regiones. 
+Los respaldos también incurren en costos extra al requerir espacio de storage para almacenarlos.
 
 # AWS Neptune
 Las bases de datos relacionales modelan bien datos que no tienen alta tasa de relación entre ellos, para modelar datos con mucha relaciones es posible utilizar bases de datos orientadas a grafos.
@@ -125,7 +174,6 @@ Las aplicaciones comunes son procesamiento de datos financieros para hacer tradi
 Timestream es un servicio PaaS, unos cuantos click bastarán para despreocuparse sobre clusters, infraestructura, tipos de storage para tener lista una base de datos funcionando.
 Aunque el servicio fue anunciado en el AWS re:Invent 2018 el servicio no está abierto a todo público, no se puede seleccionar en AWS Console, en su lugar habrá que llenar un formulario que AWS evaluará para dar acceso al servicio.
 ![timestream-preview](timestream-preview.png)
-
 
 
 
