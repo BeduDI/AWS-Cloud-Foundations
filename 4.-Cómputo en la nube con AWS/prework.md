@@ -5,5 +5,8 @@
 
 [PartiQL](https://aws.amazon.com/es/blogs/opensource/announcing-partiql-one-query-language-for-all-your-data/)
 
+[AWS Datalake](aws.amazon.com/es/blogs/apn/how-to-create-a-continually-refreshed-amazon-s3-data-lake-in-just-one-day)
+
+
 
 
