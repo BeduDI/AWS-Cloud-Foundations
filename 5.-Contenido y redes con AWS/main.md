@@ -30,7 +30,7 @@ Una red privada es definida si no tiene routing de su tráfico hacia un Internet
 # Conectividad con VPNs y Amazon Direct Connect
 
 Una red pública es básicamente el tipo de red que nos proporciona un servicio de conexión o telecomunicaciones a nuestro equipo a cambio del pago de una cuota de servicio. 
-Existen redes privadas en organizaciones en donde existen multitud de dispositivos ubicados dentro de un recinto y conectados a switchs a través de cables. En estas redes privadas, un usuario que sea externo a esta red no podrá conectarse a ella para acceder a Internet, el acceso solamente está restringido a los usuarios que estén en el interior de ella, en la mayoría de los casos claro.
+Existen redes privadas en organizaciones en donde existen multitud de dispositivos ubicados dentro de un recinto y conectados a switchs a través de cables. En estas redes privadas, un usuario que sea externo a esta red no podrá conectarse a ella para acceder a Internet, el acceso solamente esta restringido a los usuarios que estén en el interior de ella, en la mayoría de los casos claro.
 
 Es la solución de AWS para conectar la red on-premises a la red de AWS en un enlace dedicado.
 

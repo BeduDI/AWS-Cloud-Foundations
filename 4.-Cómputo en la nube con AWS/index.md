@@ -4,7 +4,7 @@ EC2 proporciona infraestructura que se ejecuta en la nube y funciona como un cen
 En concreto EC2 permite rentar un servidor remoto para ejecutar aplicaciones con una gama de diversas capacidades. Puede rentarse bajo un esquema bajo demanda por hora, #tipos_de_renta.
 En EC2 se maneja el término _instancia_ para referir a un servidor virtual conformado de red, memoria, almacenamiento y CPU,
 Otro término importante es AMI (Amazon Machine Image). AMI puede ser visto como una plantilla para la creación de servidores, las plantillas vienen configuradas con un sistema operativo y de ser requerido software específico, podemos encontrar imágenes para desplegar una instancia Ubuntu 18, aunque también podemos encontrar una AMI con Ubuntu 18 y Postgres por ejemplo.
-Las instancias pertenecen a la categoría IaaS, por lo que tenemos control hasta del propio sistema operativo, con lo cual se tiene la flexibilidad de instalar prácticamente cualquier software, desde una base de datos de cualquier proveedor como Oracle, MySql, Postgres o SQL server de Microsoft, un CMS como Wordpress, un LMS como Moodle, un servidor web como Apache o Nginx, prácticamente cualquier software puede ser instalado en una instancia de acuerdo al sistema operativo y recursos con los que se provisione. Esta flexibilidad es la que le da la connotación `elastic`, puede cubrir los requerimientos de la organización mas grande y exigente con necesidades demandantes de CPU, RAM, almacenamiento y red hasta las pequeñas empresas. La flexibilidad está dada también por los mas de 200 tipos de instancias disponibles para escoger, están pensadas para estar optimizadas en memoria, red, cómputo intensivo o propósito general.
+Las instancias pertenecen a la categoría IaaS, por lo que tenemos control hasta del propio sistema operativo, con lo cual se tiene la flexibilidad de instalar prácticamente cualquier software, desde una base de datos de cualquier proveedor como Oracle, MySql, Postgres o SQL server de Microsoft, un CMS como Wordpress, un LMS como Moodle, un servidor web como Apache o Nginx, prácticamente cualquier software puede ser instalado en una instancia de acuerdo al sistema operativo y recursos con los que se provisione. Esta flexibilidad es la que le da la connotación `elastic`, puede cubrir los requerimientos de la organización mas grande y exigente con necesidades demandantes de CPU, RAM, almacenamiento y red hasta las pequeñas empresas. La flexibilidad esta dada también por los mas de 200 tipos de instancias disponibles para escoger, están pensadas para estar optimizadas en memoria, red, cómputo intensivo o propósito general.
 
 
 
@@ -106,7 +106,7 @@ AWS Lambda es el servicio de ejecución de código fuente con pago por tiempo de
 
 ![f1060eff255ed76f06537fd5f8d88fe6.png](f1060eff255ed76f06537fd5f8d88fe6.png)
 
-Lambda no solo está limitada a trabajar con Eventos de API Gateway, puede ser disparada para ser ejecutada ante eventos de otros servicios como S3 al momento de subir un archivo, se puede configurar con CloudWatch para ejecutar una Lambda en periodos de tiempo específicos.
+Lambda no solo esta limitada a trabajar con Eventos de API Gateway, puede ser disparada para ser ejecutada ante eventos de otros servicios como S3 al momento de subir un archivo, se puede configurar con CloudWatch para ejecutar una Lambda en periodos de tiempo específicos.
 
 Hay consideraciones importantes a tomar en cuenta al trabajar con API Gateway y Lambda:
 
