@@ -3,8 +3,8 @@ Amazon Elastic Compute Cloud, o Amazon EC2, un servicio web que proporciona capa
 EC2 proporciona infraestructura que se ejecuta en la nube y funciona como un centro de datos que se ejecuta localmente. Es ideal para empresas que necesitan  flexibilidad y rendimiento al mismo tiempo.
 En concreto EC2 permite rentar un servidor remoto para ejecutar aplicaciones con una gama de diversas capacidades. Puede rentarse bajo un esquema bajo demanda por hora, #tipos_de_renta.
 En EC2 se maneja el término _instancia_ para referir a un servidor virtual conformado de red, memoria, almacenamiento y CPU,
-Otro término importante es AMI (Amazon Machine Image). AMI puede ser visto como una plantilla para la creación de servidores, las plantillas vienen configuradas con un sistema operativo y de ser requerido software específico, podemos encontrar imágenes para desplegar una instancia Ubuntu 18, aunque también podemos encontrar una AMI con Ubuntu 18 y Postgres por ejemplo.
-Las instancias pertenecen a la categoría IaaS, por lo que tenemos control hasta del propio sistema operativo, con lo cual se tiene la flexibilidad de instalar prácticamente cualquier software, desde una base de datos de cualquier proveedor como Oracle, MySql, Postgres o SQL server de Microsoft, un CMS como Wordpress, un LMS como Moodle, un servidor web como Apache o Nginx, prácticamente cualquier software puede ser instalado en una instancia de acuerdo al sistema operativo y recursos con los que se provisione. Esta flexibilidad es la que le da la connotación `elastic`, puede cubrir los requerimientos de la organización mas grande y exigente con necesidades demandantes de CPU, RAM, almacenamiento y red hasta las pequeñas empresas. La flexibilidad esta dada también por los mas de 200 tipos de instancias disponibles para escoger, están pensadas para estar optimizadas en memoria, red, cómputo intensivo o propósito general.
+Otro término importante es AMI (Amazon Machine Image). AMI puede ser visto como una plantilla para la creación de servidores, las plantillas vienen configuradas con un sistema operativo y de ser requerido software específico, **PODEMOS** encontrar imágenes para desplegar una instancia Ubuntu 18, aunque también **PODEMOS** encontrar una AMI con Ubuntu 18 y Postgres por ejemplo.
+Las instancias pertenecen a la categoría IaaS, por lo que **TENEMOS** control hasta del propio sistema operativo, con lo cual se tiene la flexibilidad de instalar prácticamente cualquier software, desde una base de datos de cualquier proveedor como Oracle, MySql, Postgres o SQL server de Microsoft, un CMS como Wordpress, un LMS como Moodle, un servidor web como Apache o Nginx, prácticamente cualquier software puede ser instalado en una instancia de acuerdo al sistema operativo y recursos con los que se provisione. Esta flexibilidad es la que le da la connotación `elastic`, puede cubrir los requerimientos de la organización mas grande y exigente con necesidades demandantes de CPU, RAM, almacenamiento y red hasta las pequeñas empresas. La flexibilidad esta dada también por los mas de 200 tipos de instancias disponibles para escoger, están pensadas para estar optimizadas en memoria, red, cómputo intensivo o propósito general.
 
 
 
@@ -13,7 +13,7 @@ Las instancias de propósito general tienen un equilibrio en velocidad de red y 
 Otro tipo son las instancias optimizadas en informática, las aplicaciones recomendadas son machinne learning, servidores de vídeo juegos, motores de publicidad dirigida, creación de modelos científicos, análisis de datos distribuidos por mencionar algunos.
 Las instancias optimizadas para memoria son especialmente útiles para ejecutar Redis, Memcached, analitycs para dashboards de BI, clusters Hadoop/Spark, base de datos como MongoDB y Cassandra.
 Otro tipo son las instancias de informática acelerada, capaces de operar con aplicaciones de deep learning, simulaciones científicas, finanzas, reconocimiento de voz, en general, todo lo que sobrepase el poder de una CPU y requiera una GPU.
-Por último las bases de datos optimizadas en almacenamiento, ideales para cargas de trabajo con demandantes requerimientos de escrituras y lecturas en disco como bases de datos relacionales, bases de datos NoSql, almacenamiento de datos.
+Por último las bases de datos optimizadas en almacenamiento, ideales para cargas de trabajo con demandantes requerimientos de escrituras y lecturas en disco como bases de datos relacionales, bases de datos **NOS**ql, almacenamiento de datos.
 
 # Creando un servidor web usando EC2: Despliegue de instancias
 
@@ -21,12 +21,12 @@ Al desplegar una instancia se debe tener presente la aplicación que se le dará
 El sitio de noticias tendrá cientos de usuarios consultando el blog al mismo tiempo, y por ser del giro de noticias, no es viable que el sitio se caiga pues afectaría la reputación de la marca, hay que pensar en una estrategia de replicación en múltiples zonas de disponibilidad, también importante tomar en cuenta dónde están ubicados físicamente los usuarios finales del servicio que ejecute la instancia así poder seleccionar la región apropiada para el despliegue de la instancia (1), seleccionar en el menú "instancias" y seleccionar "Launch instance" (3).
 ![6a02fdecfb9597dadd080ef213d5cd78.png](6a02fdecfb9597dadd080ef213d5cd78.png)
 
-Se debe seleccionar en la siguiente sección el tipo de AMI apropiada para nuestra aplicación, podemos seleccionar una AMI con solo el sistema operativo, también se puede escoger una con software específico, bastará con teclear en el buscador lo que necesitemos, como ejemplo se instalará un blog de WordPress.
+Se debe seleccionar en la siguiente sección el tipo de AMI apropiada para **NUESTRA** aplicación, **PODEMOS** seleccionar una AMI con solo el sistema operativo, también se puede escoger una con software específico, bastará con teclear en el buscador lo que **NECESITEMOS*, como ejemplo se instalará un blog de WordPress.
 NOTA: Se debe tener especial cuidado con las las imágenes de de comunidad (marcadas en rojo) según se alerta en el [siguiente artículo](https://medium.com/mitiga-io/security-advisory-mitiga-recommends-all-aws-customers-running-community-amis-to-verify-them-for-5c3e8b47d2d8).
 
 ![9b13dfc795d211ed42fa1d3a81abec83.png](9b13dfc795d211ed42fa1d3a81abec83.png)
 
-Seleccionada la AMI el paso siguiente es escoger el tipo de instancia que se ajusta a los requerimientos, primero se muestra un previo sobre los precios y tipo de instancia, al pasar el previo debemos seleccionar el tipo de instancia., es importante tomar nota de los precios, AWS presenta los precios por hora, de primera mano pueden parecer pequeños, así que siempre es recomendable hacer los cálculos necesarios para tener el precio por mes, eso da una mejor idea cuanto costará la instancia. Como ejemplo, se selecciona la instancia  t2.micro.
+Seleccionada la AMI el paso siguiente es escoger el tipo de instancia que se ajusta a los requerimientos, primero se muestra un previo sobre los precios y tipo de instancia, al pasar el previo **DEBEMOS** seleccionar el tipo de instancia., es importante tomar nota de los precios, AWS presenta los precios por hora, de primera mano pueden parecer pequeños, así que siempre es recomendable hacer los cálculos necesarios para tener el precio por mes, eso da una mejor idea cuanto costará la instancia. Como ejemplo, se selecciona la instancia  t2.micro.
 Previo:
 ![8596630ba08057e0d0b34703740471bb.png](8596630ba08057e0d0b34703740471bb.png)
 
@@ -34,7 +34,7 @@ Catálogo de instancias:
 ![a937529485a7de84a3d29026221fd0db.png](a937529485a7de84a3d29026221fd0db.png)
 
 
-Ahora debemos seleccionar el número de instancias a desplegar (a),
+Ahora **DEBEMOS** seleccionar el número de instancias a desplegar (a),
 en que red VPC y la subred a la que se conectará en este caso asignaremos una IP publica para tener acceso desde internet (b),  seleccionar el tipo de comportamiento que tendrá la instancia al apagar, se puede detener la instancia (y en consecuencia el costo de la hora de instancia, aunque el storage aún sigue cobrándose) o se puede dar por `terminated`, es decir, al apagarla será eliminada (c). Se recomienda poner la instancia con protección contra `termination`, es decir protección contra borrado accidental (d).
 ![ac92efafd0903be2bf52637158777496.png](ac92efafd0903be2bf52637158777496.png)
 
@@ -57,7 +57,7 @@ La instancia ya tiene asignada una dirección IP (b) y un dominio DNS (a) para l
 ![1494effb29ff9e53293d863390d9c4d0.png](1494effb29ff9e53293d863390d9c4d0.png)
 
 
-Hechos los pasos anteriores tendremos el blog listo, al ser una instancia con software precargado no hubo necesidad de instalar WordPress ni la base de datos ni configurar nada dentro de la instancia.
+Hechos los pasos anteriores **tendremos** el blog listo, al ser una instancia con software precargado no hubo necesidad de instalar WordPress ni la base de datos ni configurar nada dentro de la instancia.
 ![159175d79ba3fa6a8f0a877dfb17c792.png](159175d79ba3fa6a8f0a877dfb17c792.png)
 
 
@@ -74,7 +74,7 @@ Soporta lenguajes de programación basados en .NET Core en Linux y Windows, Dock
 Es posible generar múltiples aplicaciones, en cada una de ellas hay varias configuraciones que se pueden afinar dependiendo de los requerimientos del aplicativo.
 ![afb59ef1ce9c539fcfbf06abf43dd37a.png](afb59ef1ce9c539fcfbf06abf43dd37a.png)
 
-Después de algunas configuraciones tenemos una aplicación web desplegada.
+Después de algunas configuraciones **TENEMOS** una aplicación web desplegada.
 ![a3e7e25da1399d9d316e1ca1723cc5f6.png](a3e7e25da1399d9d316e1ca1723cc5f6.png)
 
 La forma anterior de trabajo de Beanstalk es un _Entorno de servidor web_, en este modo Beanstalk se prepara para recibir peticiones http o https para procesarlas y regresar una respuesta al usuario final.
@@ -102,7 +102,7 @@ API Gateway es un servicio administrado PaaS para la creación, administración,
 Es cobrada por el número de peticiones hechas y la cantidad de datos en GB de transferencia de datos, se paga por lo usado sin un mínimo.
 ![2e3c39afff8bb72dfb34be6bc431a63c.png](2e3c39afff8bb72dfb34be6bc431a63c.png)
 
-AWS Lambda es el servicio de ejecución de código fuente con pago por tiempo de ejecución, característica que lo hace flexible ante cargas de trabajo cambiantes, no se cobra si no se usa el servicio aunque existan Lambdas desplegadas. El servicio se encarga del escalado y provisionamiento (en el provisionamiento debemos especificar por lo menos la cantidad de memoria y el timeout antes de que la lambda se finalice), es un PaaS, solo hay que subir el código a la Lambda y en caso de subir la carga de trabajo el servicio automáticamente subirá el numero de Lambdas que dan servicio.
+AWS Lambda es el servicio de ejecución de código fuente con pago por tiempo de ejecución, característica que lo hace flexible ante cargas de trabajo cambiantes, no se cobra si no se usa el servicio aunque existan Lambdas desplegadas. El servicio se encarga del escalado y provisionamiento (en el provisionamiento **DEBEMOS** especificar por lo menos la cantidad de memoria y el timeout antes de que la lambda se finalice), es un PaaS, solo hay que subir el código a la Lambda y en caso de subir la carga de trabajo el servicio automáticamente subirá el numero de Lambdas que dan servicio.
 
 ![f1060eff255ed76f06537fd5f8d88fe6.png](f1060eff255ed76f06537fd5f8d88fe6.png)
 
