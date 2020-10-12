@@ -1,8 +1,28 @@
 # Amazon Simple Storage Service (S3)
-S3 es uno de los servicios icónicos de AWS. S3 lanzado en 2006 se ha convertido en el storage por excelencia a la hora de guardar archivos (objetos) a precios bajos con tiempos de acceso de milisegundos, el hecho de ser altamente resistente a pérdida de archivos ofreciendo un 99,999999999 % de durabilidad de datos (si se almacenan 10 000 objetos se espera una pérdida de un objeto cada 10 000 000 años) brinda mucha seguridad y confianza.
-S3 cuenta con diferentes niveles de servicio y precios, hay tipos de storage mas baratos pero el tiempo de acceso a los datos es mayor, si se requiere acceso a datos en el orden de los milisegundos el storage tiende a ser mas costoso.
-La forma de trabajar con S3 es por medio de `buckets`, los buckets son un contenedor de archivos u objetos, a cada bucket se le puede asignar un nombre único que no puede ser usado en ninguna otra región ni en ninguna otra cuenta de AWS, los buckets también pueden ser configurados con políticas de seguridad, aquí también es donde se especifica el nivel de storage a requerir y en consecuencia los costos que incurrirán.
-Los casos de uso comunes para S3 incluyen backups por su porcentaje de durabilidad, datalakes por su capacidad de escalamiento de unos cuantos gigabytes a petabytes sin esfuerzo, como storage para datos no utilizados que se deben guardar por regulaciones y como web server.
+
+El servicio para guardado de datos prácticamente "infinito", de simple no tiene nada, es un servicio muy interesante para guardar gigas y gigas de archivos (también conocidos como objetos) sin necesidad de tener conectado este storage a ningún sistema operativo, simplemente con una conexión http se puede hacer uso de él. Tiene un 99.999999999% de durabilidad de archivos por año, lo que quiere decir que si se almacenan 10000 objetos se espera en una pérdida de un objeto cada 10,000,000 de años, aunque esto dependerá mucho de como se configuran los buckets. 
+Los buckets son la unidad lógica mínima donde se guarda información, antes de de poder guardar cualquier tipo de archivo se debe crear un bucket, se puede  visualizar como una carpeta con configuraciones bien definidas para cifrado, niveles de servicio, políticas de acceso, replicación, manejo del ciclo de vida de los archivos, esta última muy interesante. Es posible definir el momento en que los archivos deben moverse a otros niveles de servicio de S3 en pro de reducir costos, ej: mueve todos los archivos XML de facturas del bucket a un nivel mas barato si en 90 días no se usan. 
+S3 proporciona mecanismo para brindar almacenamiento en distintos niveles de servicio, se pueden guardar archivos a precios más baratos aunque no ofrecería acceso de manera inmediata si no que puede tardar el acceso a los archivos desde varios minutos hasta varias horas, también se puede escoger una configuración especial para guardar archivos sin replicación entre zonas de disponibilidad, por defecto S3 replica la información por medio de varias zonas de disponibilidad, de poner los archivos en esta configuración se pueden perder si es que AWS perdiera por algún motivo la zona de disponibilidad.
+
+A continuación se ve el detalle de los distintos niveles de servicio:
+
+|                          Storage | Precio                   | Desempeño y latencia                        | Disponibilidad | Durabilidad   |
+|---------------------------------:|--------------------------|---------------------------------------------|----------------|---------------|
+| S3 Estándar                      | 0,023 USD por GB / Mes   | Baja latencia y alto nivel de procesamiento | 99,99%         | 99.999999999% |
+| S3 Intelligent-Tiering           | 0.023 USD por GB / mes   | Mismo de S3 Estándard                       | 99.99%         | 99.999999999% |
+| Estándar – Acceso poco frecuente | 0.0125 USD por GB / mes  | Mismo de S3 Estándard                       | 99.9 %         | 99.999999999% |
+| S3 Única zona                    | 0.01 USD por GB / mes    | Mismo de S3 Estándard                       | 99.5%          | 99.999999999% |
+| S3 Glacier                       | 0,004 USD por GB / mes   | Minutos u horas                             | 99.99%         | 99.999999999% |
+| Glacier Deep Archive             | 0.00099 USD por GB / Mes | Horas                                       | 99.99%         | 99.999999999% |
+| Reduced Redundancy Storage       | 0.024 USD por GB / Mes   | Mismo de S3 Estándard                       | 99.99%         | 99.99%        |
+
+Los conceptos clave de la tabla anterior son durabilidad y disponibilidad, la primera refiere a la probabilidad de perder un objeto cada año, la segunda es el porcentaje de tiempo que un objeto será accesible en un año.
+
+Ejemplos de buckets.
+![bucket](buckets.png)
+
+Transición a los distintos almacenamientos:
+![almacenamientos](ciclo-de-vida.png)
 
 
 # Hosting en Amazon S3

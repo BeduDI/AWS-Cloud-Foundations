@@ -1,7 +1,5 @@
 ## Sesión X - Ejemplo X 
 
-<div style="text-align: justify;">
-
 ### 1. Objetivo :dart:
 
 

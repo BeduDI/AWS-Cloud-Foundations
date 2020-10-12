@@ -1,6 +1,6 @@
 ## Prework Sesión X
 
-<div style="text-align: justify;">
+
 
 ## Introducción
 
@@ -28,4 +28,4 @@ desarrollo del proyecto personal?
 
 Utiliza apoyo visual como graficas, imagenes.
 
-LO del rework deben coincidir con el work del trabajo presencial.
+LO del prework deben coincidir con el work del trabajo presencial.
