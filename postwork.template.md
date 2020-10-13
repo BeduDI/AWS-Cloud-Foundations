@@ -1,11 +1,10 @@
 ## Postwork Sesión X
 
-<div style="text-align: justify;">
 
 ### 1. Objetivo :dart:
 
 
-### 2. Instrucciones :clipboard:
+### 2. Requisitos :clipboard:
 
 
 ### 3. Desarrollo :bookmark_tabs:
