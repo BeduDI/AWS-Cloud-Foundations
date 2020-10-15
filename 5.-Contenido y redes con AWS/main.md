@@ -42,7 +42,7 @@ Finalmente **TENEMOS** un VPG (virtual private Gateway) que da la flexibilidad d
 Algo a tener en cuenta es que las VPC tienen un límite, AWS por defecto limita a 5 VPC por región por defecto, este límite se puede superar pero solo hasta 100 VPCs, de la misma forma, los bloques de direcciones IP  permitidos en cada VPC es un máximo de 50 sin poder aumentar este límite.
 Al establecer el tamaño del bloque VPC y de las subredes se tiene que tomar en cuenta que este valor ya no puede ser modificado, la VPC y las subredes ya se quedan con el numero de IP definidas desde la creación, así que si esperas un crecimiento rápido de recursos en **tu** VPC es mejor ser generoso con el bloque de direcciones IP.
 Tomar en cuenta que las subredes pertenecen a una zona de disponibilidad, tome en cuenta a la hora de diseñar las subredes y tome en cuenta los costos asociados a tener una arquitectura de Zona múltiple.
-No todas las redes deben tener acceso directo desde internet, hay que ser cuidadoso a la hora de configurar el routing para asegurar que las redes que queremos que sean privadas en realidad lo sean.
+No todas las redes deben tener acceso directo desde internet, hay que ser cuidadoso a la hora de configurar el routing para asegurar que las redes que **queremos** que sean privadas en realidad lo sean.
 En la mayoría de los casos es buena práctica manejar múltiples capas de acceso en la infraestructura, **PODEMOS** tener una VPC para producción, subdividida con una red pública destinada a los servodores web y otra subred privada para las bases de datos.
 
 
