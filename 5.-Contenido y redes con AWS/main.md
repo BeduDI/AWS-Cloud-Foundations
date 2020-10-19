@@ -1,7 +1,7 @@
 # Amazon Virtual Private Cloud (VPC)
 
 
-AWS VPC es una red virtual aislada de otras redes virtuales donde podremos conectar recursos de AWS como instancias EC2, como toda red, esta red puede ser dividida en subredes para mejor administración del espacio de direcciones IP.
+AWS VPC es una red virtual aislada de otras redes virtuales donde **PODREMOS** conectar recursos de AWS como instancias EC2, como toda red, esta red puede ser dividida en subredes para mejor administración del espacio de direcciones IP.
 Hay una red virtual VPC generada en cada región por defecto, cuenta con conexión hacia y desde internet con al finalidad de conectar servicios de AWS rápidamente.
 Dependiendo de la arquitectura de las soluciones a desplegar no siempre será deseado que los recursos puedan ser accedidos desde internet directamente, típicamente el ejemplo es la conexión a base de datos, las bases de datos normalmente se encuentran asiladas del acceso desde internet directamente siendo accedidas por medio de un servidor web en las llamadas DMZ.
 ![6c0a3d0d798e574ea019afb082e6662a.png](6c0a3d0d798e574ea019afb082e6662a.png)
@@ -101,7 +101,7 @@ Seleccionamos el tipo de balanceador de carga que deseamos, dependiendo del tipo
 En caso de seleccionar Application Load Balancer **tendremos** que especificar un nombre para el balanceador de carga (1a), si será un balanceador de carga interno para manejar tráfico con origen y destino entre subredes o externo para manejar tráfico de origen desde internet (1b), se debe especificar si se requiere trabajar con ipv6 además de ipv4 (1c), especificar los puertos de escucha (1d), por el momento solo se pueden manejar los protocolos http y https con posibilidad para seleccionar un número de puerto no estandard, por último seleccionaremos la VPC dentro de la que se habilitará el balanceador teniendo que seleccionar las zonas de disponibilidad y las subredes entre las que habrá balanceo de carga, muy importante tomar en cuenta a la hora de diseñar el balanceo de carga, solo se puede escoger una subred por zona de disponibilidad.
 ![492aad0556bce65fd0ce8d1f49e02ca9.png](492aad0556bce65fd0ce8d1f49e02ca9.png)
 
-En la siguiente sección **DEBEMOS** seleccionar como se debe manejar el cifrado de la conexión, **tendremos** la opción de subir **NUESTRO** propio certificado SSL en caso de ya contar con uno de un proveedor externo o podremos escoger alguno ya hecho en AWS Certificate Manager (1a), después **DEBEMOS** seleccionar  los protocolos de cifrado que se usarán para establecer el canal seguro (1b)
+En la siguiente sección **DEBEMOS** seleccionar como se debe manejar el cifrado de la conexión, **tendremos** la opción de subir **NUESTRO** propio certificado SSL en caso de ya contar con uno de un proveedor externo o **PODREMOS** escoger alguno ya hecho en AWS Certificate Manager (1a), después **DEBEMOS** seleccionar  los protocolos de cifrado que se usarán para establecer el canal seguro (1b)
 ![f4e33fc1a49e7c16e94649e4de0dfc0f.png](f4e33fc1a49e7c16e94649e4de0dfc0f.png)
 Dependiendo de `security policy` seleccionada serán los protocolos de cifrado que dispondrá el balanceador de carga para negociar con los clientes que se conectarán.
 ![3540de05ee6cd4303fa1d14709b7e1f1.png](3540de05ee6cd4303fa1d14709b7e1f1.png)

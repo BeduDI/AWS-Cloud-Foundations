@@ -34,17 +34,18 @@ Es un tipo especial de storage de objetos muy económico, el precio se logra man
 
 # Elastic Block Store
 AWS Elastic Block Storage (EBS) es la solución de almacenamiento a nivel de bloque de Amazon usado con el servicio en la nube EC2 para almacenar datos persistentes. Significa que los datos se mantienen en los servidores AWS EBS incluso cuando las instancias de EC2 se apagan o terminan. EBS ofrece la misma alta disponibilidad y baja latencia rendimiento dentro de la zona de disponibilidad seleccionada permitiendo a los usuarios la capacidad de almacenamiento en la escala modelo de precios bajos basado en suscripción. Los volúmenes de datos se pueden unir de forma dinámica, separados y escalados con cualquier instancia de EC2, al igual que una unidad de almacenamiento de física en un servidor tradicional. Es un servicio en la nube altamente fiable, EBS garantiza la disponibilidad del 99,999%.
-EBS representa diferentes escalas de costos, **NOS** brinda General Purpose SSD, Provisioned IOPS SSD para cargas de trabajo demandantes, Throughput Optimized HDD para storage de bajo costo que no necesita velocidades altas  y Cold HDD si se requiere bajar los costos lo mas posible.
+EBS representa diferentes escalas de costos,  brinda General Purpose SSD, Provisioned IOPS SSD para cargas de trabajo demandantes, Throughput Optimized HDD para storage de bajo costo que no necesita velocidades altas  y Cold HDD si se requiere bajar los costos lo mas posible.
 EBS cuenta con Snapshots o instantáneas. Esta función permite el almacenamiento de volúmenes de datos de forma incremental, mientras que solo se cobra por el cambio en el volumen de datos. Por ejemplo, si se agregaron 5 GB de datos a un bloque de almacenamiento de 100 GB existente con la instantánea, AWS solo cobrará por los 5 GB adicionales de datos. Las instantáneas se pueden expandir, replicar, mover, compartir, copiar, modificar, administrar y organizar dentro y entre las zonas de disponibilidad de AWS utilizando Amazon Data Lifecycle Manager y la función de etiquetas. Todas las instantáneas de EBS se almacenan en AWS S3 que garantizan hasta 99.999999999% de durabilidad. Las instantáneas no se almacenan como objetos accesibles para el usuario, sino a través de la API de EBS. Las instantáneas se almacenan detrás de las imágenes de máquina de Amazon (AMI), lo que proporciona toda la información necesaria para recuperar datos y lanzar instancias EC2 en la nube.
 Los snapshots  es clave para los planes de continuidad de negocio para aplicaciones y servicios de misión crítica. Los administradores pueden definir los objetivos de tiempo de recuperación (RTO) y objetivos de punto de recuperación (RPO)  gestionando las instantáneas y servidores EC2 para cumplir con esos objetivos. Además de los objetivos de copia de seguridad de datos y recuperación de desastres, los administradores también utilizan instantáneas de EBS para replica de ambientes de pruebas y producción, de producción tomas una instantánea del ambiente, se renombra, se agrega a una nueva instancia EC2, la instancia se configura con sus política propias de networking y se tiene listo un servidor para desarrollo en minutos.
 
 
 # Elastic File System
- Amazon EFS **NOS** genera la posibilidad d de contar con un almacenamiento de alto rendimiento no conectado directamente al sistema operativo como es el caso de EBS si no **NOS** conectaremos por medio del protocolo de red NFS , por si mismo NFS da la posibilidad de conectarse a un mismo EFS desde distintas instancias EC2 (escala de cientos o miles de ellas), EBS solo puede ser accedido desde la instancia a la que esta asociada. EFS escala sin problemas hasta capacidades del orden de PetaBytes, el storage va creciendo a la par que **NUESTRO**s datos y lo interesante es que igual se va reduciendo a  medida que eliminamos datos.
- EFS se integra con IAM para ofrecer una solución apegada a la seguridad empresarial, es posible configurar políticas de IAM que limiten los permisos con los que una instancia se conecta o forzarlos a conectarse solo si se cumplen condiciones como el cifrado, inclusive es posible administrar el acceso a un volumen EFS desde otras cuentas de AWS. AWS Key Management Se integra con EFS para brindar soporte a volúmenes cifrados. 
- Es posible establecer también un esquema híbrido entre las instalaciones e infraestructura local y EFS conectando a servidores locales un volumen EFS por medio de una AWS VPN. No solo se puede acceder a un volumen EFS desde instancias EC2, también se puede hacer desde AWS Lambdas, Elastic Container Services, Elastic Kubernetes Service y AWS SageMaker. En sistemas de storage avanzados de la marca NetApp se tiene la inteligencia necesaria para mover información poco usada a discos duros mas lentos (y mas baratos), esta característica también la comparte EFS, ahorrándo**NOS** un poco en costos dependiendo de la cantidad de información que maneje el volumen, la decisión se hace por medio de una barrera de tiempo.
- Al generar un volumen **PODEMOS** especificar a partir de cuantos días los datos no son accesados moverlos a una "capa" de EFS mas económica, también **PODEMOS** definir la VPC donde se conectará e volumen y las redes sin dejar pasar el control de acceso por medio de grupos de seguridad, para complementar la seguridad de **NUESTRO** volumen podremos definir políticas de cifrado de tránsito, acceso de solo lectura y restricción de acceso a la raíz del volumen.
- La verdad es que es muy rápido generar un volumen EFS, después de 10 minutos de lectura y algunos clicks **tendremos** un volumen listo para ser usado. 
+ Amazon EFS  genera la posibilidad d de contar con un almacenamiento de alto rendimiento no conectado directamente al sistema operativo como es el caso de EBS ya que se accesa por medio del protocolo de red NFS , por si mismo NFS da la posibilidad de conectarse a un mismo EFS desde distintas instancias EC2 (escala de cientos o miles de ellas), EBS solo puede ser accedido desde la instancia a la que esta asociada. EFS escala sin problemas hasta capacidades del orden de PetaBytes, el storage va creciendo a la par que se van agregando datos y lo interesante es que igual se va reduciendo a  medida que se eliminan datos.
+ EFS se integra con IAM para ofrecer una solución apegada a la seguridad empresarial, es posible configurar políticas de IAM que limiten los permisos con los que una instancia se conecta o forzarlos a conectarse solo si se cumplen condiciones como el cifrado, inclusive es posible administrar el acceso a un volumen EFS desde otras cuentas de AWS. 
+ AWS Key Management se integra con EFS para brindar soporte a volúmenes cifrados aunque hay que ser cuidadosos con la factura final, Key management cobra por request.
+ Es posible establecer también un esquema híbrido entre las instalaciones e infraestructura local y EFS conectando a servidores locales un volumen EFS por medio de una AWS VPN. No solo se puede acceder a un volumen EFS desde instancias EC2, también se puede hacer desde AWS Lambdas, Elastic Container Services, Elastic Kubernetes Service y AWS SageMaker. En sistemas de storage avanzados de la marca NetApp se tiene la inteligencia necesaria para mover información poco usada a discos duros mas lentos (y mas baratos), esta característica también la comparte EFS, ahorrando un poco en costos dependiendo de la cantidad de información que maneje el volumen, la decisión se hace por medio de una barrera de tiempo.
+ Al generar un volumen se puede especificar a partir de cuantos días los datos no son accesados moverlos a una "capa" de EFS mas económica, también se puede definir la VPC donde se conectará e volumen y las redes sin dejar pasar el control de acceso por medio de grupos de seguridad, para complementar la seguridad del volumen es posible definir políticas de cifrado de tránsito, acceso de solo lectura y restricción de acceso a la raíz del volumen.
+ La verdad es que es muy rápido generar un volumen EFS, después de 10 minutos de lectura y algunos clicks esta disponible un volumen listo para ser usado. 
  ![efs](efs.png)
  
  
@@ -52,16 +53,16 @@ Los snapshots  es clave para los planes de continuidad de negocio para aplicacio
 
 # Data Transfer con AWS Snowball
 Snowball es el servicio de AWS diseñado para la transferencia de altos volúmenes de datos desde y hacia los centros de datos de AWS.
-Snowball son dispositivos físicos de unos 21 kilogramos de peso, de 50x30x50 cm con capacidad de almacenamiento de 42 TB y 72TB, con conexiones 10 gigabit para transferencia de datos diseñado para llevar datos desde **NUESTRO** propio centro de datos hacia AWS S3 y de regreso en el caso de tener tantos datos que sería inviable la transferencia por Internet en periodos cortos de tiempo.
+Snowball son dispositivos físicos de unos 21 kilogramos de peso, de 50x30x50 cm con capacidad de almacenamiento de 42 TB y 72TB, con conexiones 10 gigabit para transferencia de datos diseñado para llevar datos desde el propio centro de datos hacia AWS S3 y de regreso en el caso de tener tantos datos que sería inviable la transferencia por Internet en periodos cortos de tiempo.
 Los dispositivos son resistentes a la extracción no autorizada de información (tramper), protegidos por cifrado 256 bits con AWS KMS, físicamente son resistentes a los tratos rudos, el propio dispositivo es el contenedor de envío.
 ![https://docs.aws.amazon.com/snowball/latest/developer-guide/images/Snowball-Edge-Image.png](https://docs.aws.amazon.com/snowball/latest/developer-guide/images/Snowball-Edge-Image.png)
 
 En cuanto a precio, ronda los 300 USD por 10 días de uso.
 
 # Aurora
-Es un motor no open source de base de datos relacional compatible con MySQL y Postgres con capacidad de autoescalado y almacenamientos de hasta 64 TB
-Es compatible con snapshots para backups, cifrado con llaves KMS, es compatible con operación por instancia, **NOSOTROS** decidimos el tamaño de instancia al crear la base de datos, aunque también ofrece un modelo de precio basado en `serverless` especialmente atractivo en aplicaciones de uso poco frecuente donde la aplicación es accesada pocos minutos varias veces en un día,  es posible también adquirir un contrato con plazo de 1 o 3 años consiguiendo un mejor precio por instancia por hora.
-Aurora brinda un rendimiento aproximado 5X cuando **hablamos** de bases de datos MySQL tradicionales y 3X al hablar de Postgres, esto se logra con su motor propietario optimizado para ejecutarse sobre una configuración de hardware específica de SSD.
+Es un motor no opensource de base de datos relacional compatible con MySQL y Postgres con capacidad de autoescalado y almacenamientos de hasta 64 TB
+Es compatible con snapshots para backups, cifrado con llaves KMS, es compatible para operar con costo por instancia, tamaño de instancia es decidido al crear la base de datos, aunque también ofrece un modelo de precio basado en `serverless` especialmente atractivo en aplicaciones de uso poco frecuente donde la aplicación es accesada pocos minutos varias veces en un día,  es posible también adquirir un contrato con plazo de 1 o 3 años consiguiendo un mejor precio por instancia por hora.
+Aurora brinda un rendimiento aproximado 5X en bases de datos MySQL tradicionales y 3X al hablar de Postgres, esto se logra con su motor propietario optimizado para ejecutarse sobre una configuración de hardware específica de SSD.
 Si es posible modificar el tamaño de la instancia, la memoria y el número de CPUs, sin embargo no es en `caliente`, se tiene que entrar en un periodo de mantenimiento (la instancia deja de estar disponible) hasta que los cambios se realicen, es el análogo a reiniciar la instancia para que se ajuste a los nuevos valores.
 
 # Amazon Relational Database Service (RDS)
@@ -102,7 +103,7 @@ A continuación se muestra un registro u elemento en una tabla de Dynamo DB.
 
 
 # Amazon Elasticache 
-Dentro de la gran familia de las bases de datos NoSQL **ENCONTRAMOS** a Redis y Memcached.
+Dentro de la gran familia de las bases de datos NoSQL se encuentran Redis y Memcached.
 Redis es muy bueno para resolver cierto tipo de problemas que representan tradicionalmente un cuello de botella en bases de datos relacionales o sistemas de archivos.
 Por ejemplo, el carrito de compra de una web sin problema puede ser guardado ya sea en sesión o directamente en la base de datos, ambos enfoques se pueden mejorar bastante en rendimiento al usuario final si en lugar de guardar la información del carrito de compra en disco duro se guarda en memoria RAM por medio de Redis, al estar en memoria RAM la transacción de agregar o eliminar productos del carrito aumentará de manera notable. Lo mismo se puede hacer con Memcached, pero si es requerimiento mantener los carritos de compra en disco persistente (se desea tener esta información en el data lake para luego llevarla a un data warehouse) Redis es la opción, tiene la opción de persistir los datos que maneja en RAM en un periodo configurable, Memcached no cuenta con esto.  
 Las principales diferencias son:
@@ -136,7 +137,7 @@ Se integra con otros servicios de AWS como DynamoDB o S3 para ingesta de datos, 
 
 
 # AWS Storage Gateway
-Es un servicio que **NOS** permite conectar aplicaciones on premise con storage basado en la nube.
+Es un servicio que permite conectar aplicaciones on premise con storage basado en la nube.
 Soporta conexión con tres tipos de storage, File gateway (almacén en S3) compatible con el protocolo NFS y SMB integrando con IAM, KMS para cifrado, CloudWatch para monitoreo , Volume gateway (almacén en EBS) y Tape gateway (Almacén en S3 Glacier).
 El servicio puede ser hosteado en una maquina virtual on premise en hypervisores ESX VMWare, HyperV o lanzar una instancia EC2.
 
@@ -144,7 +145,7 @@ Un ejemplo es el uso de la solución de respaldos Backup Exec de Symantec. Es po
 ![backupexec.png](backupexec.png)
 
 Otro ejemplo:
-**TENEMOS** dos oficinas cada una en diferentes ciudades, montando una instancia de AWS Sotrage Gateway de tipo File en cada oficina con acceso a un bucket específico de S3 ambas localizaciones tendrán acceso a los archivos del bucket de forma fácil en sus sistemas operativos, en el caso de Widows se refleja como una unidad de red montada.
+Se tienen dos oficinas cada una en diferentes ciudades, montando una instancia de AWS Sotrage Gateway de tipo File en cada oficina con acceso a un bucket específico de S3 ambas localizaciones tendrán acceso a los archivos del bucket de forma fácil en sus sistemas operativos, en el caso de Widows se refleja como una unidad de red montada.
 ![Montando-carpetas-compartidas.png](Montando-carpetas-compartidas.png)
 
 ![unidad virtual.png](unidad virtual.png)
@@ -167,7 +168,7 @@ Las bases de datos de documentos o documentales se centran en métodos de almace
 
 AWS DocumentDB es una base de datos especializada en el guardado de información en formato JSON. Es compatible con la API MongoDB 3.6, en principio bastaría con modificar la cadena de conexión de la aplicación para migrar a AWS DocumenrDB.
 Es un servicio PaaS, no hay necesidad de preocuparse por administrar provisionamiento de hardware, red, parches de seguridad, configuración o instalación, incluso los respaldos están cubiertos con capacidad para respaldar directamente en S3.
-En cuanto a precio, DocumentDB se divide en cuatro dimensiones: costo por instancia, costo por E/S de datos, espacio de almacenamiento y respaldos. Un estimado en la AWS Pricing Calculator **NOS** da el [siguiente resultado](https://calculator.aws/#/estimate?id=a8d70de522d91d5266c310c057038c7dcdde557c).
+En cuanto a precio, DocumentDB se divide en cuatro dimensiones: costo por instancia, costo por E/S de datos, espacio de almacenamiento y respaldos. Un estimado en la AWS Pricing Calculator da el [siguiente resultado](https://calculator.aws/#/estimate?id=a8d70de522d91d5266c310c057038c7dcdde557c).
 
 
 
@@ -211,7 +212,7 @@ Esta característica hace de QLDB especialmente interesante en aplicaciones del 
 QLDB no soporta por el momento ningún tipo de restauración de datos ni respaldo, solo es posible exportar los datos a un bucket S3, para garantizar la disponibilidad de la información se replica a todas las zonas de disponibilidad de la región donde se ejecuta el servicio.
 QLDB tiene cifrado por defecto habilitado además es compatible con conexiones VPC privadas.
 
-Literal en dos click **TENEMOS** una instancia ejecutándose. 
+Literal en dos click se tiene una instancia ejecutándose. 
 
 ![qldb.png](qldb.png)
 
@@ -220,7 +221,7 @@ Literal en dos click **TENEMOS** una instancia ejecutándose.
 
 ![qldb-3.png](qldb-3.png)
 
-En la propia consola de QLDB **PODEMOS** ejecutar consultas con el lenguaje [PartiQL](https://partiql.org/faqs.html#what-is-partiql).
+En la propia consola de QLDB se ejecutan las consultas con el lenguaje [PartiQL](https://partiql.org/faqs.html#what-is-partiql).
 
 ![qldb-4](qldb-4.png)
 
