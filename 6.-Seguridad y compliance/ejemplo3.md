@@ -1,4 +1,4 @@
-## Sesión 3 - Ejemplo 3
+## Sesión 6 - Ejemplo 3
 
 ### 1. Objetivo :dart:
 - En un bucket S3 buscar información sensible.

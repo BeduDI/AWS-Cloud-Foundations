@@ -1,4 +1,4 @@
-## Sesión 3 - Ejemplo 2
+## Sesión 6 - Ejemplo 2
 
 ### 1. Objetivo :dart:
 - Conocer como se pueden asegurar los datos de reposo en un bucket por medio del cifrado.
