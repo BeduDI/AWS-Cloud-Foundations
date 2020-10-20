@@ -1,3 +1,16 @@
+## Prework Sesión 4 
+
+## Introducción
+
+
+### 1. Objetivo :dart:
+
+
+### 2. Instrucciones :clipboard:
+
+
+### 3. Desarrollo :bookmark_tabs:
+
 # Amazon Simple Storage Service (S3)
 
 El servicio para guardado de datos prácticamente "infinito", de simple no tiene nada, es un servicio muy interesante para guardar gigas y gigas de archivos (también conocidos como objetos) sin necesidad de tener conectado este storage a ningún sistema operativo, simplemente con una conexión http se puede hacer uso de él. Tiene un 99.999999999% de durabilidad de archivos por año, lo que quiere decir que si se almacenan 10000 objetos se espera en una pérdida de un objeto cada 10,000,000 de años, aunque esto dependerá mucho de como se configuran los buckets. 
@@ -93,7 +106,7 @@ Escritura:  Cuenta con escrituras estandar y consistencia final, las escrituras 
 
 Precios bajo demanda aplican bajo los conceptos WCU y RCU,  las solicitudes de lectura cuestan 1.25 USD por millón de solicitudes y 0.25 USD por millón de solicitudes de escritura.
 
-El almacenamiento o storage representan un costo de 0.25 USD por GB al mes. A los cargos anteriores **DEBEMOS** sumar costos de copias de seguridad, restablecimientos de los datos.
+El almacenamiento o storage representan un costo de 0.25 USD por GB al mes. A los cargos anteriores se deben sumar costos de copias de seguridad y restablecimientos de los datos.
 En el caso de tablas globales (múltiples regiones) las solicitudes de escritura tienen costo así como la transferencia de datos por ser entre regiones.
 En caso de requerir aceleración por medio de cache (Dynamo DAX) dependiendo del tamaño de la instancia se aplican costos extra. 
 Si se requieren generar acciones ante eventos en tablas específicas habrá de habilitarse DynamoDB Streams para poder conectar con AWS Lambda y ejecutar la tarea requerida, ambos servicios tienen costos adicionales.
