@@ -52,7 +52,7 @@ Es un servicio administrado con compatibilidad para base de datos Cassandra:
 - [ ] Amazon Quantum Ledger Database
 - [ ] AWS Keyspaces
 - [ ] AWS Neptune
-- [ ] 
+- [ ] DynamoDB
 
 Si se desea conectar un storage para guardado de datos desde oficinas locales hacia AWS se debe pensar en el servicio:
 - [ ] AWS Storage Gateway

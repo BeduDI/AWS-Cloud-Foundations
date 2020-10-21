@@ -14,7 +14,7 @@ Una política insertada es una política que no puede ser rehusada ya que solo e
 1. Ingresar a IAM, usuarios y seleccionar le usuario con la política insertada. Expandir la política insertada y copiar el contenido JSON de la política.
 ![r1-politica-insertada-copiar.png](r1-politica-insertada-copiar.png)
 
-2. Dirigirse al menú de políticas y luego dar click en "crear una nueva política", con ello generaremos una política que puede ser reutilizada.
+2. Dirigirse al menú de políticas y luego dar click en "crear una nueva política", con ello se generará una política que puede ser reutilizada.
 ![r1-add-new-policy.png](r1-add-new-policy.png)
 
 3. Dar click en JSON, copiar la política previamente copiada y dar click en "Revisar política".
