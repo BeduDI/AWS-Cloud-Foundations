@@ -41,3 +41,7 @@ https://www.lastweekinaws.com/blog/aws-cross-az-data-transfer-costs-more-than-aw
 
 Tagging
 https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
+
+
+Guia practica del diseño de una VPC.
+https://aws.amazon.com/es/blogs/startups/practical-vpc-design/
