@@ -1,30 +1,30 @@
-## Sesión 6 - Ejemplo 3
+# Ejemplo 3 - Habilitar Macie
 
-### 1. Objetivo :dart:
+# 1. Objetivo 🎯
 - En un bucket S3 buscar información sensible.
 
-### 2. Requisitos :pushpin:
+# 2. Requisitos 📌
 - AWS CLI instalado y configurado.
 - Un bucket S3 con algunos archivos que simularán ser archivos con información sensible.
 
-### 3. Desarrollo :bookmark_tabs:
+# 3. Desarrollo 📑
 
 1. Ingresar a la consola de AWS buscando el servicio Amazon Macie.
 ![ej3-macie-get-start.png](ej3-macie-get-start.png)
 
 2. Habilitar Macie, al habilitarlo se genera un rol con la política necesaria para que el servicio acceda al servicio S3.
 
-![el3-habilitar-macie.png](el3-habilitar-macie.png)
+![ej3-habilitar-macie.png](ej3-habilitar-macie.png)
 
-![ej2-habilitar-macie-02.png](ej2-habilitar-macie-02.png)
+![ej3-habilitar-macie-02.png](ej3-habilitar-macie-02.png)
 
 3. Al habilitar el servicio, Macie  da un reporte de los buckets a los que tiene acceso. Habrá que ejecutar un trabajo de escaneo
 
-![ej2-macie-dashboard-01.png](ej2-macie-dashboard.png)
+![ej3-macie-dashboard-01.png](ej3-macie-dashboard.png)
 
 4. Se debe seleccionar el o los buckets para ser analizados.
 
-![ej2-buckets-selected.png](ej2-buckets-selected.png)
+![ej3-buckets-selected.png](ej3-buckets-selected.png)
 
 
 5. Confirmar el bucket y el costo estimado.
@@ -47,7 +47,7 @@
 
 11.  Completado el trabajo se tendrá acceso a un reporte de hallazgos.
 
-![ej2-macie-job-done.png](ej2-macie-job-done.png)
+![ej3-macie-job-done.png](ej3-macie-job-done.png)
 
 12. Verificando el contenido del archivo se puede ver que son 4 nombres encontrados y reportados.
 ![ej3-report-done.png](ej3-report-done.png)

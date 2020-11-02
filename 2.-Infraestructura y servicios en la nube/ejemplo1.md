@@ -1,14 +1,14 @@
-## Sesión 2 - Ejemplo 1 - Usando AWS CLI
+# Ejemplo 1 - Usando AWS CLI
 
-### 1. Objetivo :dart:
+# 1. Objetivo 🎯
 - Gestionar los recursos de AWS por línea de comandos con AWS CLI.
 
-### 2. Requisitos :pushpin:
+# 2. Requisitos 📌
 - Sistema operativo actualizado.
-- Python 3.4+ instalado. [¿Cómo instalar?](https://aws.amazon.com/es/blogs/developer/deprecation-of-python-2-6-and-python-3-3-in-botocore-boto3-and-the-aws-cli/)
+- Python 3.4+ instalado. [¿Cómo instalar?](https://aws.amazon.com/es/blogs/developer/deprecation-of-python-2-6-and-python-3-3-in-botocore-boto3-and-the-aws-cli/).
 - Fecha y hora correcta en el equipo local.
 
-### 3. Desarrollo :bookmark_tabs:
+# 3. Desarrollo 📑
 
 
 

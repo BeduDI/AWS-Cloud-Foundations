@@ -1,14 +1,14 @@
-## Sesión 6 - Ejemplo 2
+# Ejemplo 2
 
-### 1. Objetivo :dart:
+# 1. Objetivo 🎯
 - Conocer como se pueden asegurar los datos de reposo en un bucket por medio del cifrado.
 
-### 2. Requisitos :pushpin:
+# 2. Requisitos 📌
 - AWS CLI instalado y configurado.
 - Acceso a AWS Console.
 - Un bucket S3 con algunos archivos que simularán ser archivos con información sensible.
 
-### 3. Desarrollo :bookmark_tabs:
+# 3. Desarrollo 📑
 El proceso de cifrado será dividido en dos fases para un bucket sin cifrado. Se comenzará especificando la política de cifrado de nuevos archivos que se suban al bucket, esta política no afectará a los archivos que ya existan en él.
 Una vez configurado el bucket habrá que cifrar todos los datos ya existentes en él.
 
@@ -29,7 +29,7 @@ lyServerSideEncryptionByDefault": {"SSEAlgorithm": "AES256"}}\]}'
 
 ![ej2-bucket-facturas-personales.png](ej2-bucket-facturas-personales.png)
 
-![ej2.awsconsole-cifrado.png](ej2.awsconsole-cifrado.png)
+![ej2-awsconsole-cifrado.png](ej2-awsconsole-cifrado.png)
 
 4. Al ver el detalle de los archivos se puede ver que los archivos existentes aun no son cifrados.
 ![ej2-files-ciphered.png](ej2-files-ciphered.png)

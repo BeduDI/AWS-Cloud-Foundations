@@ -1,9 +1,9 @@
 ## Sesión X - Ejemplo X 
 
-### 1. Objetivo :dart:
+# 1. Objetivo 🎯
 
 
-### 2. Requisitos :pushpin:
+# 2. Requisitos 📌
 
 
-### 3. Desarrollo :bookmark_tabs:
+# 3. Desarrollo 📑

@@ -1,16 +1,16 @@
-## Postwork Sesión X
+# Postwork Sesión X
 
 
-### 1. Objetivo :dart:
+# 1. Objetivo 🎯
 - Generar una instancia de base de datos administrada para el guardado de datos de la aplicación.
 
 
-### 2. Requisitos :clipboard:
+# 2. Requisitos 📋
 - Acceso con AWS Console.
 - Una VPC configurada con dos subredes privadas en diferentes zonas de disponibilidad.
 
 
-### 3. Desarrollo :bookmark_tabs:
+# 3. Desarrollo 📑
 
 1. Buscar en los servicios dentro de la consola de administración de AWS el servicio RDS.
 

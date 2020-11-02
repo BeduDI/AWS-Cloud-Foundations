@@ -1,14 +1,14 @@
-## Sesión 2 - Reto 1
+# Sesión 2 - Reto 1
 
 
-### 1. Objetivo :dart:
+# 1. Objetivo 🎯
 - Familiarización con AWS CLI
 
-### 2. Requisitos :pushpin:
+# 2. Requisitos  📌
 - AWS CLI instalado y configurado.
 - Tener presente la documentación de [AWS CLI](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/index.html) como referencia.
 
-### 3. Desarrollo :bookmark_tabs:
+# 3. Desarrollo 📑
 
 Responder a las siguientes preguntas:
 1.- ¿Cuántas zonas (dominios raíz) hay habilitadas en Route53?

@@ -1,5 +1,4 @@
-## Sesión X - Reto X 
-
+# Ejemplo 1 
 
 # 1. Objetivo 🎯
 

@@ -7,7 +7,7 @@
 ### 2. Requisitos :clipboard:
 - Acceso a la consola de AWS (log)
 - Una base de datos RDS generada, tener contraseña, usuario, url (Endpoint ) de la instancia.
-- Tener grupos de seguridad de tráfico de entrada a puertos 22,80,443,5432.
+- Tener grupos de seguridad de tráfico de entrada a puertos 22, 80, 443, 5432.
 - Certificado de seguridad en Amazon Certificade Manager.
 - [Postman](https://www.postman.com/product/rest-client/) instalado para verificar el funcionamiento de la API.
 
@@ -153,7 +153,7 @@ Ejemplo: ![pw-check-sql-connexion.png](pw-check-sql-connexion.png)
 
 ![pw-modify-instance.png](pw-modify-instance.png)
 
-- Hacer scroll hasta la parte de "Connectivity", aquí se observa el problema, se tiene un grupo de seguridad por defecto, habrá que cambiar el grupo para explicitamente permitir el tráfico al puerto 5432.
+- Hacer scroll hasta la parte de "Connectivity", aquí se observa el problema, se tiene un grupo de seguridad por defecto, habrá que cambiar el grupo para explícitamente permitir el tráfico al puerto 5432.
 
 ![pw-bad-security-group.png](pw-bad-security-group.png)
 

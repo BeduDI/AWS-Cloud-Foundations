@@ -5,13 +5,13 @@
 ## Introducción
 
 
-### 1. Objetivo :dart:
+# 1. Objetivo 🎯
 
 
-### 2. Instrucciones :clipboard:
+# 2. Instrucciones 📋
 
 
-### 3. Desarrollo :bookmark_tabs:
+# 3. Desarrollo 📑
 
 
 

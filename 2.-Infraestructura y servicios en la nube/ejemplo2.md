@@ -1,18 +1,18 @@
-## Sesión 2 - Ejemplo 2 - Generando un bucket y copiando un archivo
+# Ejemplo 2 - Generando un bucket y copiando un archivo
 
-### 1. Objetivo :dart:
-- Generar un bucket S3 como contenedor de facturas
+# 1. Objetivo 🎯
+- Generar un bucket S3 como contenedor de facturas.
 
-### 2. Requisitos :pushpin:
-- AWS CLI instalado y configurado
+# 2. Requisitos 📌
+- AWS CLI instalado y configurado.
 - Algunos archivos que se deseen subir al bucket.
 
 
-### 3. Desarrollo :bookmark_tabs:
+# 3. Desarrollo 📑
 
 1. Abrir la línea de comandos del sistema operativo que se este usando:
 
-2. Usar el comando 
+2. Usar el comando  mb (make bucket) para generar un bucket.
 ```sh
 aws --region us-east-1 s3 mb s3://facturas
 ```

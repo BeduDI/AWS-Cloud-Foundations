@@ -1,3 +1,25 @@
+# Prework Sesión X
+
+
+
+## Introducción
+Cómputo compartido ha sido uno de los principales motivantes para la evolución de lo que hoy conocemos como nube. Cada proveedor de nube ofrece formas diversas de cómputo en la nube más allá de máquinas virtuales, el modelo de ejecución serverless ha adquirido buena popularidad en los últimos cuatro años.
+El como una aplicación será desplegada, administrada, escalada y mantenida será dictado en gran medida por el tipo de cómputo seleccionado y las necesidades específicas del negocio a soportar. 
+
+
+### 1. Objetivo :dart:
+- Brindar las habilidades para ejecutar software en la nube de AWS desde el hágalo por usted mismo hasta seleccionar una solución preconfigurada lista para ejecuatarse.
+
+
+### 2. Instrucciones :clipboard:
+- Buscar un lugar libre tranquilo libre dde notificaciones de dispositivos electrónicos.
+- Leer con atención.
+
+
+
+### 3. Desarrollo :bookmark_tabs:
+
+
 # Amazon Elastic Compute Cloud (EC2)
 Amazon Elastic Compute Cloud, o Amazon EC2, un servicio web que proporciona capacidad de cómputo en la nube segura y escalable.
 EC2 proporciona infraestructura que se ejecuta en la nube y funciona como un centro de datos que se ejecuta localmente. Es ideal para empresas que necesitan  flexibilidad y rendimiento al mismo tiempo.

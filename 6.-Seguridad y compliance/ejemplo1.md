@@ -1,13 +1,13 @@
-## Sesión 6 - Ejemplo 1 
+# Ejemplo 1 
 
-### 1. Objetivo :dart:
+# 1. Objetivo 🎯
 - Conceder acceso restringido al bucket que funciona como web server para solo poder eliminar o agregar objetos a modo de mantenimiento de la página web servida por él. Así a quien se le conceda acceso podrá dar mantenimiento a la web sin comprometer la seguridad de la cuenta de AWS. 
 
-### 2. Requisitos :pushpin:
+# 2. Requisitos 📌
 - AWS CLI instalado configurado y funcionando.
 - Un bucket previamente configurado como servidor web estático funcional.
 
-### 3. Desarrollo :bookmark_tabs:
+# 3. Desarrollo 📑
 
 1. Ingresar a la consola de administración de AWS para acceder al servicio IAM.
 

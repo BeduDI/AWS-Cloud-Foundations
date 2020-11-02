@@ -1,14 +1,14 @@
-## Sesión 2 - Ejemplo 3 - Servidor web estático
+# Ejemplo 3 - Servidor web estático
 
-### 1. Objetivo :dart:
+# 1. Objetivo 🎯
 - Poner en marcha un bucket S3 como un servidor web estático.
 
-### 2. Requisitos :pushpin:
-- Git instalado localmente. [¿Cómo instalar git?](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-- Repositorio en local https://github.com/mdn/beginner-html-site-styled
+# 2. Requisitos 📌
+- Git instalado localmente. [¿Cómo instalar git?](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+- Repositorio en local https://github.com/mdn/beginner-html-site-styled.
 
 
-### 3. Desarrollo :bookmark_tabs:
+# 3. Desarrollo 📑
 
 1. Ingresar a la consola de AWS y seleccionar S3.
 ![b1129b066999b324d197ae15ca6042a2.png](b1129b066999b324d197ae15ca6042a2.png)
@@ -59,7 +59,7 @@ Los pasos siguientes son:
  12. A nivel bucket pasar a "Permisos" (a), editar (b) y desactivar la opción bloquear todo acceso público (d), guardar cambios.
  ![74f36eac2ab0dee018358fb8857ae291.png](74f36eac2ab0dee018358fb8857ae291.png)
 
-13. En información general a nivel de búcket (a), seleccionar todos los archivos (b), después click en "Hacer público".
+13. En información general a nivel de bucket (a), seleccionar todos los archivos (b), después click en "Hacer público".
 ![sitio-estatico-hacer-publico.png](sitio-estatico-hacer-publico.png)
 
 14. Hechos los  pasos anteriores la página web esta lista para ser servida.
