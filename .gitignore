@@ -499,3 +499,9 @@ MigrationBackup/
 .ionide/
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,linux,visualstudio,visualstudiocode,intellij+all
+*.zip
+*.doc
+*.docx
+.ztr-directory
+.vscode
+.vscode/**
