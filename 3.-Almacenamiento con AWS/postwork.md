@@ -71,8 +71,8 @@ R) Seleccionar el puerto de conexión de la base de datos.
 
 
 s) Seleccionar como se podrá acceder a la base de datos, en este caso "Password authentication".
-t) Establecer un nombre descriptivo de la base de datos (es diferente al identificador que es uítil solo para el dashboard de RDS), el nombre será parte de la cadena de conexión.
-u) Deshabilitar los backus por el momento, en un entorno de producción deben ser habilitados y configurados.
+t) Establecer un nombre descriptivo de la base de datos (es diferente al identificador que es útil solo para el dashboard de RDS), el nombre será parte de la cadena de conexión.
+u) Deshabilitar los backups por el momento, en un entorno de producción deben ser habilitados y configurados.
 v)  Deshabilitar las métricas de rendimiento,  en un entorno de producción deben ser habilitadas y configuradas.
 
 ![pw-configure-database-05.png](pw-configure-database-05.png)
