@@ -1,4 +1,4 @@
-## Sesión X - Reto X 
+# Reto X 
 
 
 # 1. Objetivo 🎯

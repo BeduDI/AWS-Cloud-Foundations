@@ -1,4 +1,4 @@
-## Sesión X - Ejemplo X 
+# Ejemplo X 
 
 # 1. Objetivo 🎯
 
