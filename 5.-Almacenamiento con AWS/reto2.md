@@ -10,7 +10,7 @@
 - Acceso a la consola de AWS (web).
 
 # 3. Desarrollo 📑
-Todas las operaciones se pueden hacer en la 
+Todas las operaciones se pueden realizar en el panel del servicio de AWS Keyspaces en el editor de consultas CQL.
 
 Generar un nuevo registro sobre la tabla `transactions_by_category`
 [Aquí](https://cassandra.apache.org/doc/latest/cql/dml.html#insert) la documentación de CQL para hacer un insert.
