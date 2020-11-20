@@ -1,8 +1,7 @@
-## Prework Sesión X
+# Prework Sesión X
 
 
-
-## Introducción
+# Introducción
 
 
 # 1. Objetivo 🎯
