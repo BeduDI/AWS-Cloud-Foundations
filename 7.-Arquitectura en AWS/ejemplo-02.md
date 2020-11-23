@@ -8,7 +8,7 @@
 
 # 3. Desarrollo 📑
 
-
+#### El siguiente ejemplo y código están destinados únicamente a fines educativos. Asegúrese de personalizarlo, probarlo y revisarlo por su cuenta antes de usar cualquiera de esto en producción.
 
 1. Ir al servicio IAM para generar un nuevo usuario con el que poderse conectar al repositorio. Click en "añadir usuario".
 ![ej2-iam-add-user-01.png](ej2-iam-add-user-01.png)
