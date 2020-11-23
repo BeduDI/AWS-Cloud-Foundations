@@ -1,7 +1,7 @@
 # Prework
 
 # Introducción
-Hay varios tópicos en AWS más avanzados, los anteriores fueron los bloque fundamentales que toda la nube de AWS está construida. 
+Hay varios tópicos en AWS más avanzados, los anteriores fueron los bloques fundamentales que toda la nube de AWS está construida. 
 Tópicos avanzados de AWS se construyen y manejan sobre los tópicos básicos, se dará por hecho que los tópicos básicos se conocen por lo que no se profundizará en ellos al ser mencionados.
 
 
@@ -44,7 +44,7 @@ CodeDeploy puede desplegar código en cualquier lenguaje de programación, lo ú
 En cuanto a precios, no hay costos asociados en los despliegues hechos en EC2, ECS o Lambda, solo hay costo si es un despliegue local.
 
 -CodePipeline
-Finalmente la orquestación e integración de todas estas etapas se vuelve un factor clave par el éxito de una estrategia de entrega continua de código. Con CodePipeline se define un flujo de entrega de software en mira de minimizar el tedioso trabajo de construcción de desplegables, testing y despliegue y con ello también el error humano. Todos los pasos son altamente configurables por la Consola de AWS, API, SDK, AWS CLI y CloudFormation, especialmente interesante AWS CLI y CloudFormation por sus capacidades de automatización.
+Finalmente la orquestación e integración de todas estas etapas se vuelve un factor clave para el éxito de una estrategia de entrega continua de código. Con CodePipeline se define un flujo de entrega de software en mira de minimizar el tedioso trabajo de construcción de desplegables, testing y despliegue y con ello también el error humano. Todos los pasos son altamente configurables por la Consola de AWS, API, SDK, AWS CLI y CloudFormation, especialmente interesante AWS CLI y CloudFormation por sus capacidades de automatización.
 CodePipeline no queda relegado a trabajar con servicios de AWS, también se integra bien con Github, Jenkins o TeamCity, BlazeMeter, Ghost Inspector entre otros.
 
 
@@ -53,7 +53,7 @@ En entornos productivos sistemas fiables, tolerantes a fallos y altamente dispon
 Históricamente lograr estos objetivos requería especialistas con buena experiencia, adquisición de hardware y software, acondicionamiento, múltiples centros de datos (muchas veces inviables económicamente), hoy día con la explosión de la oferta de cómputo en la nube es relativamente sencillo conseguir aplicaciones con niveles de disponibilidad prácticamente a la par de empresas líderes en el sector.
 La propia distribución de las regiones y zonas de disponibilidad de AWS proporciona facilidad para despliegue en zonas geográficas distintas sin sacrificar la cercanía de las soluciones al usuario final. El servicio ELB es clave en la estrategia de distribución de tráfico hacia distintas zonas de disponibilidad dando pie al diseño de arquitecturas resistentes a fallas (pasivas) o tráfico intensivo (activas). 
 La replicación y generación de clusters de base de datos con el servicio RDS libera a los administradores de las tareas de configuración, es fácil generar un servicio de base de datos con réplica en 3 distintas zonas de disponibilidad con capacidad de redirección de tráfico en caso de que uno de los nodos del cluster falle.
-La etapa de servidores es igualmente fácil de escalar, el servicio EC2 se integra fácilmente con ELB para tolerancia ante fallas, con el advenimiento de contenedores Docker es aún más sencillo generar arquitecturas altamente tolerante a fallos por la propia naturaleza autocontenida de toda la configuración necesaria para que una aplicación funcione, en AWS se hace uso de servicios como ELK o ECS.
+La etapa de servidores es igualmente fácil de escalar, el servicio EC2 se integra fácilmente con ELB para tolerancia ante fallas, con el advenimiento de contenedores Docker es aún más sencillo generar arquitecturas altamente tolerantes a fallos por la propia naturaleza autocontenida de toda la configuración necesaria para que una aplicación funcione, en AWS se hace uso de servicios como ELK o ECS.
 Otros servicios totalmente administrados de AWS como SQS, SES, Lambda, S3, VPC, Toda la suite de Macchinne Learning, API Gateway y una larga lista de otros servicios indudablemente con los niveles de servicios que ofrecen podemos tener certeza que las arquitecturas diseñadas prácticamente no tendrán puntos únicos de falla.
 
 # Arquitectura de datos
@@ -128,7 +128,7 @@ Se basa en el cumplimiento de 5 pilares:
 * Hacer cambios pequeños en favor de poder hacer rollback con el menor impacto de esos cambios en caso de ser necesario. 
 * Buscar continuamente oportunidades para mejorar procedimientos operativos.
 * Anticiparse a fallos revisando periódicamente el diseño y el performance de la solución.
-* Aprender de todos los incidentes haciendo restrospectiva una vez solucionados para que no se vuelvan a repetir.
+* Aprender de todos los incidentes haciendo retrospectiva una vez solucionados para que no se vuelvan a repetir.
 
 - Seguridad:
 * Toda aplicación debería contar la aplicación del [principio del mínimo privilegio](https://www.securelink.com/blog/what-are-the-benefits-of-the-least-privileged-principle/) en todas las escalas de la aplicación, desde las redes VPC, balanceadores de carga hasta las instancias que ejecutan el aplicativo, IAM puede ayudar en esta tarea ofreciendo mecanismos de acceso granular a los servicios de AWS con credenciales fijas o temporales.
@@ -155,7 +155,7 @@ Todas las estrategias anteriores van enfocadas al aumento en la disponibilidad d
 
 - Optimización de costos:
 * Al igual que otros pilares, el ramo financiero debe tener atención a fin de tener un buen retorno de inversión después de todo es esfuerzo implementado a lo largo de semanas en la implementación y mantenimiento de la solución a los clientes.
-* Se ofrece en varios servicios pago pro uso en horas, hay que aprovechar esta flexibilidad por ejemplo una instancia EC2 en desarrollo no es necesario que esté disponible las 24 horas del día, se puede apagar fuera de horario laboral y fines de semana.
+* Se ofrece en varios servicios pago por uso en horas, hay que aprovechar esta flexibilidad por ejemplo una instancia EC2 en desarrollo no es necesario que esté disponible las 24 horas del día, se puede apagar fuera de horario laboral y fines de semana.
 * Medir siempre lo que se gasta y en que se gasta da mucha claridad y la información suficiente para emprender nuevas estrategias de venta y monetización, AWS Cost Explorer  es ideal para esta tarea.
 * Dejar de gastar en mantenimiento de infraestructura, operaciones, mantenimiento y personal puede ser beneficioso para la organización. Así es más fácil centrarse en clientes y proyectos en lugar de preocuparse por la infraestructura.
 
