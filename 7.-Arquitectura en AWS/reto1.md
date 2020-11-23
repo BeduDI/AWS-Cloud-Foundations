@@ -11,6 +11,8 @@
 
 # 3. Desarrollo 📑
 
+#### El siguiente ejemplo y código están destinados únicamente a fines educativos. Asegúrese de personalizarlo, probarlo y revisarlo por su cuenta antes de usar cualquiera de esto en producción.
+
 Elasticsearch permite ademas de búsquedas generar funciones de agregado.
 
 El resultado de la búsqueda con funciones de agregado puede ayudar a generar menús como el siguiente señalado.
