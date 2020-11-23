@@ -5,7 +5,7 @@
 
 
 # 2. Requisitos 📋
-- Git 1.7.9 o superior.
+-
 
 # 3. Desarrollo 📑
 
@@ -72,65 +72,6 @@
 
 
 
-
--------- Code Commit ---------------- Despliegue de código
-
-![pw-iam-add-user-01.png](pw-iam-add-user-01.png)
-
-
-![pw-iam-create-user-1a.png](pw-iam-create-user-1a.png)
-
-
-![pw-iam-create-user-02.png](pw-iam-create-user-02.png)
-
-
-![pw-iam-create-user-03.png](pw-iam-create-user-03.png)
-
-![pw-iam-create-user-03b.png](pw-iam-create-user-03b.png)
-
-![pw-iam-created-user-finished-01.png](pw-iam-created-user-finished-01.png)
-
-
-![pw-iam-create-ssh-code-commit-01.png](pw-iam-create-ssh-code-commit-01.png)
-
-![pw-iam-download-credentials-01.png](pw-iam-download-credentials-01.png)
-
-![pw-download-zip-file-01.png](pw-download-zip-file-01.png)
-
-![pw-download-repository-01.png](pw-download-repository-01.png)
-
-
-
-![pw-cc-access-01.png](pw-cc-access-01.png)
-
-![cc-create-new-repository-02.png](cc-create-new-repository-02.png)
-
-![pw-cc-creating-repository-assign-name.png](pw-cc-creating-repository-assign-name.png)
-
-
-![pw-cc-clone-https-01.png](pw-cc-clone-https-01.png)
-
-`git clone https://git-codecommit.us-east-1.amazonaws.com/v1/repos/generador_leads`
-
-
-![pw-add-remote-origin-to-repository.-01.png](pw-add-remote-origin-to-repository.-01.png)
-
-![pw-cc-repository-from-aws-codecomit01.png](pw-cc-repository-from-aws-codecomit01.png)
-
-
-
-![pw-copy-files-from-zip-downloaded-01.png](pw-copy-files-from-zip-downloaded-01.png)
-
-
-![pw-git-add-files-01.png](pw-git-add-files-01.png)
-
-![pw-git-commit-add-files-01.png](pw-git-commit-add-files-01.png)
-
-![pw-git-push-files-first-commit-01.png](pw-git-push-files-first-commit-01.png)
-
-Regresando a CodeCommit se pueden ver los archivos.
-
-![pw-cc-git-commit-view-all-01.png](pw-cc-git-commit-view-all-01.png)
 
 
 -----------------------
