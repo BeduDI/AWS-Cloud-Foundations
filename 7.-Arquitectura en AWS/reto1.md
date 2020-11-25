@@ -2,7 +2,7 @@
 
 
 # 1. Objetivo 🎯
-- Establecer las bases apra la generación de menus interactivos en un ecommerce.
+- Establecer las bases para la generación de menus interactivos en un ecommerce.
 
 
 # 2. Requisitos 📌
