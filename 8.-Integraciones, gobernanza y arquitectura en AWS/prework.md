@@ -95,9 +95,49 @@ Los agentes de mensajes permiten la transmisión de desde y hacia dispositivos I
 
 # AWS Config: seguridad reactiva
 
+Especializado en auditoría y compliance, de ahí el término seguridad reactiva, básicamente AWS config permite poner en un dashboard todos los servicios utilizados en todas las regiones con el estado de compliance que se se defina en _reglas_ de trabajo. Por ejemplo, es posible definir el escaneo de todas las instancias de EC2 y comprobar que dichas instancias tengan solo el puerto 22 abierto a direcciones IP específicas, de no cumplir con esta regla habrá una alarma en el dashboard.
+Hay una forma más eficiente de hacer auditoría de buenas prácticas dependiendo la industria o necesidades, es por medio de  _paquete de conformidad_  (Conformance Pack) , hay una serie de plantillas pre definidas, cada paquete esta compuesta de una regla, lo que hace muy eficiente a la hora de auditar, un ejemplo es el paquete **# Operational Best Practices for PCI DSS 3.2.1** que ayudará en el cumplimiento re las reglas que tienen que ver con el manejo de información de tarjetas de crédito, cuenta con unas 70 reglas a cumplir. 
+Actualmente se cuentan con más de 65 paquetes de reglas listos para ser utilizados.
+AWS Config se vuelve muy atractivo a la hora de auditar múltiples cuentas de AWS, es posible por medio de un _agregador_ concentrar los datos de otros servicios AWS Config de otras cuentas.
+No es la herramienta más atractiva visualmente, pero la facilidad de integración es indiscutible, aunque esto es una de sus mayores desventajas pues solo soporta servicios de AWS, en caso de tener un esquema multicloud habrá que usar herramientas como Splunk o SolarWinds.
+Vale la pena usar la herramienta, el hecho de poder tener un inventario de todo lo utilizado que ya es muy bueno se contará con capacidades para guardar todos los cambios de configuraciones que se hagan sobre los recursos, con esa información se puede reducir considerablemente el tiempo de resolución de fallas.
+
+
+
 
 # AWS Systems Manager
+System manager es una herramienta para gestión de infraestructura no limitado solo a recursos de AWS, se puede usar para la gestión de servidores on-premise físicos o virtuales.
+Se basa en cuatro pilares; monitoreo, auditoría, optimización y ejecución. 
 
+System manager se subdivide en:
+- Administración de aplicaciones
+* Grupos de recursos: Es una forma de organización de recursos de AWS haciendo fácil la administración de ellos, especialmente útil cuando hay una larga lista de recursos a administrar
+* AppConfig: Tiene la capacidad de crear y manejar el despliegue de configuraciones de aplicación, puede ser usado para encender o apagar características de aplicaciones como un anuncio, otro caso de uso es permitir a usuarios de paga acceso a contenido exclusivo.
+* Parameter Store: Provee un repositorio seguro de secretos, es posible guardar de forma segura passwords, cadenas de conexión de base de datos, códigos de licencias, etc. Es especialmente útil para incrustar contraseñas o información sensible en scripts, comandos, documentos de system manager y flujos de automatización.
+
+- Administración de operaciones
+* Explorador: Es un dashboard que reporta información sobre los recursos de AWS, normalmente incluyendo metadata de instancias EC2.
+* OpsCenter: Permite al personal de operaciones manejar incidentes con la ayuda de métricas como utilización de CPU de las instancias EC2, cargos estimados de facturas, status check de instancias, espacio en discos EBS.
+* Panel de CloudWatch: Son dashboards configurables que pueden ser usados para monitorear los recursos de AWS en una única vista aún siendo recursos en diferentes regiones.
+* Personal Health Dashboard: Provee información sobre la salud de los servicios de AWS, la información se presenta en eventos  programados y en un histórico de eventos de los últimos 90 días.
+
+- Acciones y cambios
+* Automatización: Simplifica las tareas de mantenimiento comunes o repetitivas de algunos recursos de AWS entre ellos instancias EC2, permite el manejo de flujos de trabajo por medio de documentos json o yml. Las tareas de automatización pueden ser tan sencillas como apagar instancias, pero al hablar de decenas de instancias separadas por regiones esa simple tarea puede llevar mucho esfuerzo. 
+* Cambiar calendario: Se pueden programar tareas de automatización, ¿se requiere un cambio a media madrugada?.
+* Periodos de mantenimiento:  Permite definir tareas programadas que pueden potencialmente interrumpir las operaciones como lo son parches de seguridad sobre el sistema operativo o sobre software de aplicativos.
+
+- Instancias y nodos: Provee las siguientes acciones en instancias EC2 o en servidores locales ya sea físicos o  virtuales, además de recursos de AWS.
+* Conformidad: Usado para escaneo y comprobación de cumplimiento de parches de seguridad en instancias.
+* Inventario: Provee la visibilidad necesaria de la recolección de datos de instancias EC2 o servidores locales. Los datos recolectados son guardados en un bucket S3 y después ser explotados para conocer que instancias están ejecutándose, que instancias requieren algún tipo de actualización por ejemplo. 
+* Instancias administradas: Ver y administrar instancias centralizadamente ya sea EC2 o instancias locales incluyendo sistemas operativos Windows, Linux e incluso dispositivos Raspberry Pi. 
+* Activaciones híbridas: Es el panel donde se pueden dar de alta recursos externos a AWS, el panel provee un mecanismo de autorización para poder agregar un recurso a AWS System manager de forma segura.
+* Session Manager: Permite la conexión a instancias EC2 o servidores locales físicos o virtuales por medio de una consola de línea de comandos en una ventana web sin necesidad de abrir puertos, tener servidores de administración adicionales ni manejo de llaves SSH. Session manager ayuda al cumplimiento de políticas de seguridad corporativas relativas al acceso a recursos.
+* Run Command: Permite remotamente manejar la configuración de instancias EC2 o servidores locales físicos o virtuales. Se pueden ejecutar comando relacionados con la construcción de flujos de despliegue de aplicaciones, captura de logs, unión de servidores a un dominio de Windows por ejemplo.
+* State Manager: Permite establecer configuraciones específicas para instancias EC2 o servidores externos a AWS, las configuraciones son el estado que se desea mantener, una definición de estado puede establecer que se debe instalar un software específico y además ciertos puertos deben ser cerrados o abiertos.
+* Patch Manager: Automatiza el proceso de mantener las instancias con las últimos parches de seguridad, soporta aplicación de parches para Windows, AWS Linux, CentOS, Debian, Red Hat, SUSE Linux y Ubuntu Server.
+* Distribuidor: Permite empacar software por ejemplo antivirus, para instalar en instancias manejadas por System Manager. 
+
+- Documentos: Bajo el contexto System Manager un documento (document) es una secuencia de acciones a seguir ya sea en YAML o JSON, con ello se reduce el error humano. Los documentos soportan versionado, se pueden tener documentos de meses anteriores disponibles para usarse en el momento que se requieran. System Manager incluye mas de 100 documentos preconfigurados clasificados en  Command document usados para ejecutar comandos y aplicar configuraciones sobre instancias, Automation document usado para ejecutar tareas de mantenimiento y despliegue, Policy document obligan al seguimiento de políticas de seguridad por último Session document para determinar una sesión de conexión por un túnel ssh o redirección de puertos.
 
 # AWS Organizations y Control Tower
 
