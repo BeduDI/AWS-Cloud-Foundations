@@ -20,13 +20,14 @@
 3. Seleccionar un nombre para el bucket, recordar que el nombre debe ser único es decir que no se haya repetido en ninguna otra cuenta de AWS.
 ![sitio-estatico-nombre-bucket.png](sitio-estatico-nombre-bucket.png)
 
-4. Establecer etiquetas para el bucket.
-![sitioestatico-tags.png](sitioestatico-tags.png)
-5. Dejar la configuración de acceso por defecto
+4. Dejar la configuración de acceso por defecto
 ![sitioestatico-bucket-acceso.png](sitioestatico-bucket-acceso.png)
 
+5. Establecer etiquetas para el bucket.
 6. Dar click en "Crear bucket"
-![sitioestatico-generar-bucket.png](sitioestatico-generar-bucket.png)
+![sitioestatico-tags.png](sitioestatico-tags.png)
+
+
 
 Observar la generación del bucket:
 ![sitioestatico-bucket-generado.png](sitioestatico-bucket-generado.png)
@@ -39,6 +40,7 @@ Observar la generación del bucket:
 
 9. Arrastrar los archivos y carpetas, si no se arrastran las carpetas no pueden ser seleccionadas. Dar click en "Cargar"
 ![sitioestatico-upload-files.png](sitioestatico-upload-files.png)
+
 Los archivos serán cargados y se podrán ver en la consola de AWS S3.
 ![sitioestatico-archivos-cargados.png](sitioestatico-archivos-cargados.png)
 
@@ -56,7 +58,7 @@ Los pasos siguientes son:
 11. Establecer la configuración de alojamiento estático (a), proporcionar el nombre del archivo que será servido por default (b), click en guardar (c).
 ![sitioestatico-habilitar-sitio-estatico.png](sitioestatico-habilitar-sitio-estatico.png)
  
- 12. A nivel bucket pasar a "Permisos" (a), editar (b) y desactivar la opción bloquear todo acceso público (d), guardar cambios.
+ 12. A nivel bucket pasar a "Permisos" (a), editar (b) y desactivar la opción bloquear todo acceso público (c), guardar cambios.
  ![74f36eac2ab0dee018358fb8857ae291.png](74f36eac2ab0dee018358fb8857ae291.png)
 
 13. En información general a nivel de bucket (a), seleccionar todos los archivos (b), después click en "Hacer público".
