@@ -19,7 +19,7 @@
 - [ ] AWS Step Functions
 
 
-¿PErmite mapear información entre productos SaaS y el servicio S3 o Redshift?
+¿Permite mapear información entre productos SaaS y el servicio S3 o Redshift?
 - [ ] AppFlow
 - [ ] Amazon SWF
 - [ ] Amazon MQ

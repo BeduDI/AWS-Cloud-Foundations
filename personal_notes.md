@@ -45,3 +45,12 @@ https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
 
 Guia practica del diseño de una VPC.
 https://aws.amazon.com/es/blogs/startups/practical-vpc-design/
+
+
+---------------------
+
+Se actualizan las instancias EC2
+https://aws.amazon.com/es/blogs/aws/ec2-update-d3-d3en-dense-storage-instances/
+
+Se actualiza Lambda, ahora soporta Contenedores.
+https://aws.amazon.com/es/blogs/aws/new-for-aws-lambda-container-image-support/
