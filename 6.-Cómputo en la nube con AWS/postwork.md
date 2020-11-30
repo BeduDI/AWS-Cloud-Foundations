@@ -62,14 +62,14 @@ sudo systemctl enable docker
 ![pw-security-group-01.png](pw-security-group-01.png)
 
 
-8. Verificar las ocnfiguraciones y lanzar las instancias.
+8. Verificar las configuraciones y lanzar las instancias.
 ![pw-launch-instance.png](pw-launch-instance.png)
 
 9. Generar la llave de conexión nueva (a), establecer el nombre de la llave (b), descargar la llave (c) sin la llave no se podrá conectar a la instancia por SSH, finalizar en "Launch Instances" (d).
 
 ![pw-launch-instance-01.png](pw-launch-instance-01.png)
 
-Después de algunos momentos las instancais son generadas.
+Después de algunos momentos las instancias son generadas.
 
 ![pw-launching-instances-01.png](pw-launching-instances-01.png)
 
@@ -103,7 +103,7 @@ e) Seleccionar las subredes públicas de cara a internet.
 ![pw-security-group-load-balancer.png](pw-security-group-load-balancer.png)
 
 
-6. Estableder el "target group", básicamente con esto se le indica al balanceador de carga cuales son las instancias EC2 a las que debe ser redirigido el tráfico.
+6. Establecer el "target group", básicamente con esto se le indica al balanceador de carga cuales son las instancias EC2 a las que debe ser redirigido el tráfico.
 
 a), b) Especificar un nuevo target, dar un nombre específico al target para fácil administración.
 c) especificar que se darán de alta en el grupo instancias.
