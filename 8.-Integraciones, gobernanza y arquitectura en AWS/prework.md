@@ -140,11 +140,146 @@ System manager se subdivide en:
 - Documentos: Bajo el contexto System Manager un documento (document) es una secuencia de acciones a seguir ya sea en YAML o JSON, con ello se reduce el error humano. Los documentos soportan versionado, se pueden tener documentos de meses anteriores disponibles para usarse en el momento que se requieran. System Manager incluye mas de 100 documentos preconfigurados clasificados en  Command document usados para ejecutar comandos y aplicar configuraciones sobre instancias, Automation document usado para ejecutar tareas de mantenimiento y despliegue, Policy document obligan al seguimiento de políticas de seguridad por último Session document para determinar una sesión de conexión por un túnel ssh o redirección de puertos.
 
 # AWS Organizations y Control Tower
+AWS organizations es con servicio para la gestión de múltiples cuentas de AWS.
+La gestión consiste en manejar la facturación, control de accesos, seguridad y compliance.
+Para algunas compañías una estructura multi cuenta ayuda a cumplir con ciertos objetivos estratégicos. El primero y más obvio es el aislamiento de redes, prácticamente los servicios de una cuenta no degradan a o se ven afectados por los servicios de otra, modularidad, escalabilidad y sobre todo compliance limitando especialmente se agradece a la hora de las auditorías, se pueden usar los servicios e infraestructura que requieren alguna certificación como PCI DSS en una cuenta única, para lo demás se usaría otra.
+Con Organizations se pueden las cuentas guardar en grupos (unidades Organizacionales o UO), sobre esos grupos se pueden aplicar políticas específicas.
+Básicamente Organizations maneja se maneja con una cuenta maestra, es la cuenta que construye la organización (una vez establecida no puede ser cambiada), desde esta cuenta se generan otras cuentas en la organización o se remueven cuentas de la organización.  
+
+Control Tower es un servicio que automatiza el proceso de creación de una línea base para entornos multi cuenta que son seguros y que normalmente cumplen el well architected framework. Es interesante que el servicio ayuda a incorporar el conocimiento y la experiencia que se va ganando. Control Tower se asienta en los hombros de otros servicios como AWS Organizations, AWS IAM, AWS Config y AWS Cloud Trail.
+Para entender Control Tower conviene profundizar en los elementos que lo componen:
 
 
-# Shared Responsibility Model
+Landing Zone: el entorno general de múltiples cuentas que Control Tower configura.
+
+Blueprints: patrones de diseño bien diseñados que se utilizan para configurar la Landing Zone.
+
+Guardrails: implementaciones automatizadas de controles de políticas, con un enfoque en la seguridad, el cumplimiento y la administración de costos.
+
+Environment : una cuenta de AWS y los recursos que contiene, configurados para ejecutar una aplicación.
+
 
 # Integración de datos On-premise
+- AWS Data Pipeline: 
+Es el servicio para automatizar la transformación y movimiento de datos. Tiene el connotativo _pipeline_ por que se pueden establecer flujos de trabajo dependientes de si etapas previas fueron fallidas o exitosas.
+Se compone de tres grande componentes, la definición del flujo, las fechas o periodos de ejecución y los ejecutores de tareas que pueden ser instancias EC2, instancias manejadas por Data Pipeline y servidores on premise.
+
+Pileline se integra con los servicios DynamoDB, RDS, Redshift y S3, para la etapa de servicios de cómputo se integra con EC2 y clusters EMR.
+
+La etapa de definición es importante para establecer los formatos que serán soportados (json, csv, etc), las actividades que transformaran de los datos, las precondiciones que deben ser satisfechas antes de que las actividades puedan ser programadas
+Los nodos de datos (Data nodes) representan los tipos de datos y la localización que puede ser accedido por Pipeline, se incluyen elementos de salida y entrada.
+Las Actividades (Activities) representan acciones en el flujo de trabajo, CopyActivitiy, SQLActivity, ShellCommandActivity son solo algunos tipos de actividades soportadas.
+Recursos (Resuources) son las instancias EC2 o cluster EMR usado.
+
+
+
+- AWS Glue: 
+Ya se ha hablado en el pasado sobre Glue, el servicio de ETL administrado de AWS, tiene una característica interesante, se puede conectar a repositorios de datos locales por medio de Java™ Database Connectivity (JDBC), la especificación de conexión estandard para la conexión y la gestión de bases de datos. Coursera usa a AWS Glu para integrar los datos de distintas fuentes de datos a un warehouse en Redshift para después poder generar el sistema de recomendaciones. Como referencia consultar [aquí](https://aws.amazon.com/es/blogs/big-data/how-to-access-and-analyze-on-premises-data-stores-using-aws-glue/).
 
 
 # Procesamiento, análisis de datos y machine learning
+
+AWS proporciona varias capas para poder cubrir la cuota de mercado referente a machine learning. En el nivel mas alto se tiene los servicios de AI, se caracterizan por por que no es necesario una habilidad técnica especial, es del tipo de servicios solo consuma y disfrute. 
+
+En el siguiente nivel se tienen los denominados ML services, son servicios que requieren ciertas habilidades técnicas sobre el tema como hyperparametrización y selección de features, aunque los servicios de esta capa proveen lo necesario para facilitar todo el ciclo de vida de un modelo de machine learning.
+
+Por último se cuenta con una capa de frameworks e infraestructura, es una capa para los más experimentados, en este nivel prácticamente se tiene que programar desde cero todo el modelo, el despliegue corre igual por cuenta propia, da mas control pero pone mas estrés en el desarrollador.
+
+
+El marco de trabajo OSEM en un estandard ampliamente usado para el modelado de datos en ciencia de datos, es especialmente útil en problemas de amplia escala.
+OSEM establece actividades clara al momento de hablar de procesamiento de datos, las actividades son:
+* Obtener (obtain)
+* depurar (Scrub)
+* Explorar (Explore)
+* Modelar (Model)
+* iNterpretar (iNterpret)
+
+- Obtain:
+Los datos se pueden generar a partir de ensayos clínicos, experimentos científicos,
+ encuestas, páginas web, simulaciones por computadora, etc. 
+Hay muchas formas en que se pueden almacenar los datos y parte del desafío inicial 
+es simplemente leer los datos para poder analizarlos.
+AWS cuenta con mútiples opciones para compelar este paso, tal vez la mas versálit es S3, 
+aunque RDS, Redshift, Athena son opciones loables.
+
+- Scrub:
+La depuración de datos se refiere al procesamiento previo necesario para preparar los datos antes del análisis. Esto puede implicar eliminar filas o columnas particulares, 
+manejar datos faltantes, corregir inconsistencias debido a errores de ingreso de datos, transformar fechas, generar variables derivadas o calculadas, combinar datos de múltiples fuentes, etc. 
+Desafortunadamente no existe un método que pueda manejar todas las posibles necesidades de preprocesamiento de datos.
+
+- Explore:
+Una vez que sus datos estén listos para ser utilizados, y justo antes de pasar a la IA 
+y al aprendizaje automático, tendrá que explorar los datos.
+En general, en un entorno corporativo o empresarial, el negocio simplemente 
+arrojarán un conjunto de datos y depende de uno encontrarle sentido.
+En primer lugar, se deberá inspeccionar los datos y todas sus propiedades. 
+Hay diferentes tipos de datos como datos numéricos, datos categóricos, datos ordinales 
+y nominales, etc. Con eso, existen diferentes tipos de características de datos que requerirán que se manejen de manera diferente.
+El término "feature" que se utiliza en el aprendizaje automático o en el modelado, son las características de los datos para ayudarlo a identificar cuáles son las características que representan los datos. 
+Por ejemplo, "Nombre", "Edad", "Sexo" son características del conjunto de datos.
+
+- Model:
+Esta es la etapa más interesante del ciclo de vida del proyecto de ciencia de datos. 
+Como mucha gente lo llamaría "donde ocurre la magia".
+
+Una vez más, antes de llegar a esta etapa, hay que tener en cuenta que la etapa de 
+depuración y exploración es crucial para que este proceso tenga sentido.
+
+Una de las primeras cosas que debe hacer al modelar datos es reducir la 
+dimensionalidad de su conjunto de datos. No todas sus características o 
+valores son esenciales para predecir su modelo. Por lo tanto, lo que se debe hacer es seleccionar los feature relevantes que contribuirán a la predicción de los resultados que está buscando.
+Además de la clasificación o predicción de los resultados, el propósito de esta etapa también puede incluir la agrupación de datos para comprender la lógica detrás de esos grupos. 
+Por ejemplo, si se requiere agrupar los clientes de un e-commerce para comprender 
+su comportamiento en su sitio web se requeriría que se identifiquen grupos de puntos de datos con algoritmos de agrupamiento como k-means; o hacer predicciones usando regresiones como regresiones lineales o logísticas.
+
+- iNterpret:
+La interpretación de datos se refiere básicamente a la presentación de los datos, 
+entregando los resultados de tal manera que se puedan responder las preguntas que negocio hizo cuando comenzó el proyecto por primera vez.
+Se deberán visualizar los hallazgos  manteniéndolos impulsados por las preguntas de negocio. Es muy importante poder presentar los hallazgos de una manera que sea útil para la organización, o de lo contrario no tendría sentido para las partes interesadas.
+
+
+Para comprender mejor los flujos de trabajo se explorará en Amazon SageMaker y Amazon Rekognition, hay muchos más servicios implicados en temas de machine learnign, solo se tocan estos a modo introductorio ya que no entran de lleno en la certificación pero vale la pena por la demanda en el mercado.
+
+
+## Amazon Rekognition (AI Services):
+El servicio de procesamiento de imágenes de tipo plug and play, sin requerir dar mantenimiento y escalable bajo demanda, no se requiere ningún tipo de experiencia con modelos de machine learning.
+Tener el poder de identificar objetos, personas, texto en vídeos e imágenes prácticamente sin esfuerzo sin duda acelera mucho el proceso de desarrollo de aplicaciones y producto para el cliente final. Los precios van en función del procesado por imágen o por minuto de vídeo. Rekognition cuenta con un ámplio catálogo de funcionalidades:
+* Detección de objetos y escenas: Útil para reconocer objetos en una escena como personas, bicicletas y montañas en una escena de bicicleta de montaña.
+* Moderación de contenido: ¿se requiere la restricción o alerta ante contenido relacionado con juegs de azar, alcohol, cigarro drogas u otro contenido inapropiado? esta es la opción a elegir.
+* Análisis facial: Útil para extraer características del rostro de una persona tales como sexo, puntos de referencia del rostro,-
+* Comparación de rostros: Una aplicación que requiera temas de seguridad por ejemplo evitar el acceso a un edificio por personas no gratas requerirá que los rostros sean identificados y comparados con esa lista de rechazados.
+* Detección de texto: Da la capacidad a aplicaciones de tdetectar y reconocer texto de una imagen o video, en casetas de cobro puede ser una solución útil si se requiere tomar la placa de los autos o en estacionamientos de edificios gubernamentales.
+* EPP: Si se requieren cumplir normas estrictas de seguridad en el área de trabajo esta es la opción idónea.
+![prework-epp-0001.png](prework-epp-0001.png)
+
+Básicamente todos los tipos de procesamiento anterior aplican tanto para imágenes como para vídeo.
+
+
+## # Amazon Textract (AI Services):
+La migración de datos de medios impresos (generalmente archivo) es una necesidad hoy día de bajo perfil. Tradicionalmente esta tarea se hace con un ejército de personas a modo de  capturistas de datos.
+Con Textract el personal requerido puede aminorar, las capacidades de estraer texto de impresiones, texto de un documento a mano alzada, extracción de información de documentos y tablas.
+El servicio es un servicio administrado de Amazon, no se requieren tareas de despliegue ni procesos de escalado ante altas demandas, el precio va en función de las llamadas a la API que se hagan al servicio y el tipo de operación requerida.
+
+## Amazon Comprehend (AI Services):
+Servicio administrado de Procesamiento de Lenguaje Natural, muy útil para extraer información de textos.
+La información que puede extraerse es:
+- Entities: Tales como fechas, números telefónicos, nombres de empresas, cantidades.
+- Análisis de sentimiento: Útil para conocer si el texto tiene connotaciones positivas o negativas.
+- Sintaxis: Extrae información relacionada al tipo de palabras encontradas entre pronombres, sustantivos etc.
+- Lenguaje: Identificación del lenguaje de un texto.
+
+## Amazon SageMaker (ML Services): 
+Las tareas de generación de modelos matemáticos basados en técnicas de machine learning son retadores, normalmente requieren de  personal especializado, herramientas como Amazon SageMaker son herramientas que pueden ayudar a reducir la inclinación de la pendiente de aprendizaje a niveles aceptables para comenzar a hacer prototipos rápidamente. 
+SegeMaker es un entorno completo para la construcción,  entrenamiento y puesta en marcha de un modelo de machine learning. ¿Cómo se logra?, con el uso de la conocida herramienta [Jupyter](https://jupyter.org/) ampliamente difundida entre personal especialista en temas de datos, es una interfaz web amigable para crear documentos con código "vivo", ecuaciones y texo documental, con ella los procesos de depuración de datos, simulación, modelado y visualización de datos.
+Todo eso es solo parte del proceso de construcción de un modelo de machine learning, es muy importante el set de datos con el que se entrenará y validará el modelo, hay múltiples set de datos en internet, aunque no siempre funcionan para los requerimientos específicos, en caso de requerir un set de datos se puede hacer uso de Amazon SageMaker Ground Truth con ayuda de [crowdsourcing](https://dl.acm.org/doi/abs/10.1145/3318464.3383127) con Amazon Mechanical Turk o con un equipo o empresa de terceros. También es posible generar datasets de forma automatizada, Ground truth usa machine learning para decidir cuales datos deben ser etiquetados por personas, así el esfuerzo de labeling se aminora. Las técnicas de generación de datos  soportadas son [bounding box](https://keymakr.com/blog/what-are-bounding-boxes/), [segmentación semántica](https://nanonets.com/blog/semantic-image-segmentation-2020/), [clasificación de imágenes](https://d2l.ai/chapter_linear-networks/image-classification-dataset.html), para texto se tiene [reconocimiento de entidades}https://monkeylearn.com/blog/named-entity-recognition/, [clasificación de textos](https://www.analyticsvidhya.com/blog/2018/04/a-comprehensive-guide-to-understand-and-implement-text-classification-in-python/), vídeo también es soportado.
+
+Para la parte de entrenamiento se cuentan con varios algoritmos BlazingText, DeepAR Forecasting, Image Classification Algorithm, Factorization Machines, K-Means Algorithm, K-Nearest Neighbors (k-NN) Algorithm, Random Cut Forest (RCF) Algorithm, BlazingText algorithm, Latent Dirichlet Allocation (LDA) Algorithm, Neural Topic Model (NTM) Algorithm por mencionar solo algunos.
+
+Después de entrenar el modelo con el algoritmo adecuado se deberá hacer el despliegue para que los usuarios finales lo puedan utilizar. Se puede generar un endpoint en un servicio hosteado en Segemaker ya sea un único modelo o múltiples modelos. Otra forma de hacerlo es por medio de batch, es una forma útil cuando se requieren obtener el resultado de múltiples datos en un dataset al mismo tiempo, ya que por medio del endpoint implicaría varias llamadas, no sería un proceso muy óptimo.
+
+Ya en producción se debe proceder con un monitoreo para saber si el modelo se comporta como se esperaba o si el negocio ha cambiado y el modelo esta perdiendo precisión. Siempre la detección de fallas tempranas es bien agradecido por los usuarios finales. Se tiene la posibilidad de usar un modelo de monitoreo predefinido o uno propietario.
+
+
+
+
+

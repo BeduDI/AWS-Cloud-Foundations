@@ -1,7 +1,7 @@
 # Ejemplo 1
 
 # 1. Objetivo 🎯
-- Conocer todos los los servicios que estan siendo ejecutados o consumidos en la cuenta de AWS
+- Conocer todos los los servicios que están siendo ejecutados o consumidos en la cuenta de AWS.
 
 # 2. Requisitos 📌
 - Acceso a AWS Console
