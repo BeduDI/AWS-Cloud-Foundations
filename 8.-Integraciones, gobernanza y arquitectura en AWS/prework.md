@@ -48,7 +48,7 @@ Imaginar un entornos con un aplicativo de ventas en fechas de navidad, el tráfi
 
 
 
-- Amazon SWF:
+- Amazon SWF (Amazon Simple Workflow):
 SWF es un orquestador o manejador de flujo de tareas entre servicios de aplicaciones distribuidas. SWF puede ayudar a acelerar el desarrollo de aplicaciones en las etapas donde se requiere guardar un estado de la aplicación es decir saber cuales tareas se han completado y cuales siguen su curso siendo no necesario implementar bases de datos y software para el monitoreo, ¿qué sucede con la comunicación de tareas? algunos procesos de negocio requieren que algunas tareas se ejecuten antes que otras por lo que las tareas deben estar al tanto de lo que hacen las otras, el desarrollador se puede ahorrar el desarrollo de canales de comunicación sin comprometer la integridad de la información, otra ventaja es contar con esta lógica de flujo centralizada en un solo lugar con las ventajas de mantenimiento que esto trae. Siguiendo con el seguimiento de estado, algunas aplicaciones requieren en su flujo de operación la aprobación antes de pasar al siguiente flujo, imaginar un sistema de pagos, se generan varias ordenes de pago a proveedores y al final del día el director financiero debe revisarlas y aprobarlas todas, con SWF este estado de "pendientes de aprobar" queda latente hasta que el director financiero explícitamente en la aplicación las pase a estado "aprobado".
 Se tienen por un lado los _workers_ y los _deciders_, los primeros se encargan de la ejecución de las tareas y devolución de resultados una ves ejecutada, se pueden ejecutar sobre instancias EC2 o Lambdas, los _deciders_ coordinan la lógica de ejecución definiendo el paso a paso en el procesamiento, por ejemplo, se pueden reintentar tareas en caso de fallas, omitir tareas dada una condición específica por parte de un worker con lo que se puede cambiar el flujo de la aplicación fácilmente. Una gran característica de SWF es el control por medio de su propio SDK de desarrollo, el llamado AWS Flow Framework, con él es posible generar flujos complejos de coordinación de tareas (deciders). Al generar un flujo con el SDK el programa se comunica con SWF para ejecutar los flujos correspondientes en el tiempo preciso.
 
@@ -84,13 +84,10 @@ El envío de mensajes según el segmento permitirá hacer exclusión de clientes
 Streaming data son datos generados continuamente "sin fin" por cientos de fuentes que pueden ser utilizados aun sin necesidad de ser descargados primero. Se puede ver como el agua que fluye en un río, de forma similar, los datos son generados por varios tipos de fuentes en formatos diversos y volúmenes distintos, desde aplicaciones, dispositivos de red, dispositivos IoT, transacciones en sitios web, datos de ubicación, etc. Por ejemplo, cuando un usuario de servicios de transporte privado llama un servicio se genera un stream de datos proveyendo la localización del usuario, por otro lado se debe juntar el stream de datos sobre el tráfico, con ellos se debe poder calcular el precio a cobrar todo en tiempo real. Ese solo fue un ejemplo, los casos de uso típicos son actualización de inventarios, forecasting, monitoreo de logs, actividad de los usuarios, detección de fraude, datos de localización, pool services o servicios en coincidencia (como car pool) combinando localización y presupuestos de los usuarios basados en proximidad, destino y precios. 
 Kinesis es el servicio de alta disponibilidad con soporte para manejo de mensajes bajo la arquitectura _producer_ y _consumer_.
 Kinesis se subdivide en servicios especializados de acuerdo a necesidades específicas,  Kinesis Data Streams es más acorde para el desarrollo de aplicaciones de streaming de necesidades específicas, incluso el provisionamiento de capacidad de manejo de mensajes es controlado por el administrador, tiene capacidad de retención de datos de hasta siete días, prácticamente diseñado en tiempo real. Kinesis Data Firehose es el servicio listo para ingesta de datos en streaming depositándolos directamente en un lago de datos como S3 o Redshift, indexado de información como Amazon Elasticsearch Service o incluso puntos de enlace http, proveedores como New Relic y Mongo DB también son soportados. Es un servicio totalmente administrado aunque no cuenta con retención de datos, el valor agregado de Firehose es que se pueden modificar o preparar los datos antes de ser cargados en el data lake, aunque esto puede impactar un poco en el performance, Kinesis Data Analytics permite el análisis de datos en tiempo real sobre un stream de datos, se evita esperar horas o días antes de ser procesada la información, en su lugar deberán ser solo segundos o minutos. 
-por último Kinesis Video Streams diseñado para la transmisión de vídeo en vivo no solo a otras personas, también a modelos de machine learning para análisis, en tiempos de pandemia se vuelve interesante transmitir vídeo para detectar zonas o puntos rojos donde no se usan mascarillas faciales, al final esos datos se pueden coorrelacionar para formar mapas de calor par establecer un cerco sanitario.
+Por último Kinesis Video Streams diseñado para la transmisión de vídeo en vivo no solo a otras personas, también a modelos de machine learning para análisis, en tiempos de pandemia se vuelve interesante transmitir vídeo para detectar zonas o puntos rojos donde no se usan mascarillas faciales, al final esos datos se pueden correlacionar para formar mapas de calor par establecer un cerco sanitario.
 
 - Agente de mensajes de AWS IoT:
 Los agentes de mensajes permiten la transmisión de desde y hacia dispositivos IoT con soporte para protocolos MQTT y WebSockets. 
-
-
-# Gobierno de cuentas con AWS CloudTrail
 
 
 # AWS Config: seguridad reactiva
@@ -171,9 +168,7 @@ Los nodos de datos (Data nodes) representan los tipos de datos y la localizació
 Las Actividades (Activities) representan acciones en el flujo de trabajo, CopyActivitiy, SQLActivity, ShellCommandActivity son solo algunos tipos de actividades soportadas.
 Recursos (Resuources) son las instancias EC2 o cluster EMR usado.
 
-
-
-- AWS Glue: 
+- AWS Glue:
 Ya se ha hablado en el pasado sobre Glue, el servicio de ETL administrado de AWS, tiene una característica interesante, se puede conectar a repositorios de datos locales por medio de Java™ Database Connectivity (JDBC), la especificación de conexión estandard para la conexión y la gestión de bases de datos. Coursera usa a AWS Glu para integrar los datos de distintas fuentes de datos a un warehouse en Redshift para después poder generar el sistema de recomendaciones. Como referencia consultar [aquí](https://aws.amazon.com/es/blogs/big-data/how-to-access-and-analyze-on-premises-data-stores-using-aws-glue/).
 
 
@@ -255,7 +250,7 @@ Tener el poder de identificar objetos, personas, texto en vídeos e imágenes pr
 Básicamente todos los tipos de procesamiento anterior aplican tanto para imágenes como para vídeo.
 
 
-## # Amazon Textract (AI Services):
+## Amazon Textract (AI Services):
 La migración de datos de medios impresos (generalmente archivo) es una necesidad hoy día de bajo perfil. Tradicionalmente esta tarea se hace con un ejército de personas a modo de  capturistas de datos.
 Con Textract el personal requerido puede aminorar, las capacidades de estraer texto de impresiones, texto de un documento a mano alzada, extracción de información de documentos y tablas.
 El servicio es un servicio administrado de Amazon, no se requieren tareas de despliegue ni procesos de escalado ante altas demandas, el precio va en función de las llamadas a la API que se hagan al servicio y el tipo de operación requerida.
