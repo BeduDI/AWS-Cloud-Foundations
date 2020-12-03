@@ -76,7 +76,8 @@
 
 -------------------------------
 
-1. De regreso en la cuenta del usuario, al acceder a S3 ya se listan los buckets. Acceder al bucket al que se aplicó la política de acceso (a)
+1. De regreso en la cuenta del usuario, al acceder a S3 ya se listan los buckets. 
+(a) Acceder al bucket al que se aplicó la política de acceso 
 
 ![ej1-access-again.png](ej1-access-again.png)
 

@@ -21,8 +21,7 @@ aws --region us-east-1 s3 ls
 
 2. Configurar la política de cifrado para nuevos archivos especificando el nombre del bucket y el tipo de cifrado que tendrá el bucket con el comando:
 ```ssh
-aws --region us-east-1 s3api put-bucket-encryption --bucket facturas-personales --server-side-encryption-configuration '{"Rules": \[{"App  
-lyServerSideEncryptionByDefault": {"SSEAlgorithm": "AES256"}}\]}'
+aws --region us-east-1 s3api put-bucket-encryption --bucket facturas-personales --server-side-encryption-configuration '{"Rules": [{"ApplyServerSideEncryptionByDefault": {"SSEAlgorithm": "AES256"}}]}'
 ```
 
 3. Al ingresar a la consola de AWS al entrar a las propiedades del bucket se verá la siguiente opción habilitada indicando que el bucket cifrará los archivos nuevos que sean depositados.
