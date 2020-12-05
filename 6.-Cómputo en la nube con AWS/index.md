@@ -33,7 +33,7 @@ Las instancias pertenecen a la categoría IaaS, por lo que se tiene el control h
 ##  Amazon EC2: Tipos de servicios
 Las instancias de propósito general tienen un equilibrio en velocidad de red y memoria ideal para ejecutar web servers, contenedores y entornos de desarrollo.
 Otro tipo son las instancias optimizadas en informática, las aplicaciones recomendadas son machinne learning, servidores de vídeo juegos, motores de publicidad dirigida, creación de modelos científicos, análisis de datos distribuidos por mencionar algunos.
-Las instancias optimizadas para memoria son especialmente útiles para ejecutar Redis, Memcached, analitycs para dashboards de BI, clusters Hadoop/Spark, base de datos como MongoDB y Cassandra.
+Las instancias optimizadas para memoria son especialmente útiles para ejecutar Redis, Memcached, analytics para dashboards de BI, clusters Hadoop/Spark, base de datos como MongoDB y Cassandra.
 Otro tipo son las instancias de informática acelerada, capaces de operar con aplicaciones de deep learning, simulaciones científicas, finanzas, reconocimiento de voz, en general, todo lo que sobrepase el poder de una CPU y requiera una GPU.
 Por último las bases de datos optimizadas en almacenamiento, ideales para cargas de trabajo con demandantes requerimientos de escrituras y lecturas en disco como bases de datos relacionales, bases de datos NOSql, almacenamiento de datos.
 
