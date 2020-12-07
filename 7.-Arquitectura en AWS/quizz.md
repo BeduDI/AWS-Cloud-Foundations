@@ -1,4 +1,4 @@
-¿Orquesta las múltiples estapas de un esquema de integración continua?
+¿Orquesta las múltiples etapas de un esquema de integración continua?
 - [ ] CodePipeline  
 - [ ] CodeDeploy
 - [ ] CodeBuild
